@@ -28,7 +28,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
         // CARGA INICIAL PARA TESTES
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Lethal Weapon', 'Máquina Mortifera')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Die Hard', 'Máquina Mortifera')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Die Hard', 'Duro de Matar')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('The Blair Witch Project', 'A Bruxa de Blair')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Horrible Bosses', 'Quero Matar Meu Chefe')");
     }
