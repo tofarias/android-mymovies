@@ -1,9 +1,11 @@
-package com.example.tiago.mymovies;
+package com.example.tiago.mymovies.holder;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.tiago.mymovies.R;
 
 public class MovieHolder extends RecyclerView.ViewHolder{
 

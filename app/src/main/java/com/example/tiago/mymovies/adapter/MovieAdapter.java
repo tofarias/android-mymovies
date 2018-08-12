@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tiago.mymovies.MovieHolder;
 import com.example.tiago.mymovies.R;
+import com.example.tiago.mymovies.holder.MovieHolder;
 import com.example.tiago.mymovies.model.Movie;
 
 import java.util.List;
