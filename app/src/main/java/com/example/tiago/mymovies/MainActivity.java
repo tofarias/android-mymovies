@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.tiago.mymovies.adapter.MovieAdapter;
 import com.example.tiago.mymovies.dao.MovieDao;
 import com.example.tiago.mymovies.dao.db.MovieDaoDb;
 import com.example.tiago.mymovies.model.Movie;

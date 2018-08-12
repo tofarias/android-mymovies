@@ -1,4 +1,4 @@
-package com.example.tiago.mymovies;
+package com.example.tiago.mymovies.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tiago.mymovies.MovieHolder;
+import com.example.tiago.mymovies.R;
 import com.example.tiago.mymovies.model.Movie;
 
 import java.util.List;
