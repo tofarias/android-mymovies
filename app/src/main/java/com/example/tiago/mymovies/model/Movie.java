@@ -4,10 +4,21 @@ public class Movie {
 
     private String titleEn;
     private String titlePtBr;
+    private int id;
+
+    public Movie(int id, String titleEn, String titlePtBr) {
+        this.id = id;
+        this.titleEn = titleEn;
+        this.titlePtBr = titlePtBr;
+    }
 
     public Movie(String titleEn, String titlePtBr) {
         this.titleEn = titleEn;
         this.titlePtBr = titlePtBr;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitleEn() {
