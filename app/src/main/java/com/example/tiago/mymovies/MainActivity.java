@@ -45,4 +45,14 @@ public class MainActivity extends AppCompatActivity {
         Intent it = new Intent(MainActivity.this, RegisterActivity.class);
         startActivity(it);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MovieDao movieDao = new MovieDaoDb(this);
+        this.moviesList = movieDao.listAll();
+
+        this.movieAdapter.setMovieList( this.moviesList );
+        this.movieAdapter.notifyDataSetChanged();
+    }
 }
