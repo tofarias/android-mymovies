@@ -5,6 +5,6 @@ import com.example.tiago.mymovies.model.Movie;
 import java.util.List;
 
 public interface MovieDao {
-    public List<Movie> listar();
+    public List<Movie> listAll();
     public void save(Movie movie);
 }

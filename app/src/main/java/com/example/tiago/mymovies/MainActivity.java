@@ -20,21 +20,23 @@ public class MainActivity extends AppCompatActivity {
 
     List<Movie> moviesList = new ArrayList<>();
     MovieAdapter movieAdapter;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recMovies);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
         MovieDao movieDao = new MovieDaoDb(this);
-        this.moviesList = movieDao.listar();
+        this.moviesList = movieDao.listAll();
 
-        MovieAdapter adapter = new MovieAdapter(this.moviesList);
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(
+        this.recyclerView = (RecyclerView) findViewById(R.id.recMovies);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        this.movieAdapter = new MovieAdapter(this.moviesList);
+
+        this.recyclerView.setAdapter(movieAdapter);
+        this.recyclerView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
     }

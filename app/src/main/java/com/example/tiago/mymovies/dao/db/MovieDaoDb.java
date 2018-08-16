@@ -33,7 +33,7 @@ public class MovieDaoDb implements MovieDao {
     }
 
     @Override
-    public List<Movie> listar() {
+    public List<Movie> listAll() {
 
         SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
 
