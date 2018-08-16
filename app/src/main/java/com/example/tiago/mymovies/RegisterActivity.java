@@ -1,6 +1,5 @@
 package com.example.tiago.mymovies;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -34,8 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         Toast.makeText(this,"Cadastro realizado com sucesso!",Toast.LENGTH_SHORT).show();
 
-        Intent mainActivityIntent = new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(mainActivityIntent);
+        finish();
     }
 
     public void cancelRegistration(View view){
