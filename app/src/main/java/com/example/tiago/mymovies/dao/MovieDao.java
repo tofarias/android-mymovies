@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface MovieDao {
     public List<Movie> listar();
+    public void save(Movie movie);
 }

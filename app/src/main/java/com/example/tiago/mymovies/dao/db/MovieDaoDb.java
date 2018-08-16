@@ -1,5 +1,6 @@
 package com.example.tiago.mymovies.dao.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,6 +17,19 @@ public class MovieDaoDb implements MovieDao {
 
     public MovieDaoDb(Context context) {
         this.dbSqlite = new DbOpenHelper(context);
+    }
+
+    @Override
+    public void save(Movie movie) {
+
+        SQLiteDatabase db = this.dbSqlite.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("title_pt_br",movie.getTitlePtBr());
+        values.put("title_en",movie.getTitleEn());
+
+        db.insert("movie",null,values);
+        db.close();
     }
 
     @Override
