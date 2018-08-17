@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MovieDao movieDao = new MovieDaoDb(this);
-        this.moviesList = movieDao.listAll();
 
         this.recyclerView = (RecyclerView) findViewById(R.id.recMovies);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
