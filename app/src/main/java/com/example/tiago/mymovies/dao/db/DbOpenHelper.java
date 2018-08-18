@@ -15,8 +15,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                                                 "(" +
                                                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                                                 "category_id int NOT NULL,"  +
-                                                "title_en VARCHAR(50)," +
-                                                "title_pt_br VARCHAR(50)," +
+                                                "title_en VARCHAR(50) UNIQUE," +
+                                                "title_pt_br VARCHAR(50) UNIQUE," +
                                                 "comment VARCHAR(100)," +
                                                 "FOREIGN KEY(category_id) REFERENCES category(id)"+
                                                 ")";
@@ -24,7 +24,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     private static String sqlCreateCategoryTable = "CREATE TABLE "+ DbOpenHelper.CATEGORY_TABLE+
                                                     "(" +
                                                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                                                    "name VARCHAR(50) NOT NULL" +
+                                                    "name VARCHAR(50) NOT NULL UNIQUE" +
                                                     ")";
 
     public DbOpenHelper(Context context) {
