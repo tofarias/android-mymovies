@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.tiago.mymovies.dao.MovieDao;
 import com.example.tiago.mymovies.dao.db.MovieDaoDb;
+import com.example.tiago.mymovies.model.Category;
 import com.example.tiago.mymovies.model.Movie;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -26,12 +27,17 @@ public class RegisterActivity extends AppCompatActivity {
         String titlePtBr = edtTitlePtBr.getText().toString().trim();
         String titleEn   = edtTitleEn.getText().toString().trim();
 
-        Movie movie = new Movie(titleEn, titlePtBr);
+        Movie movie = new Movie(titleEn, titlePtBr, new Category("TESTE"));
 
         MovieDao movieDao = new MovieDaoDb(this);
-        movieDao.save(movie);
 
-        Toast.makeText(this,"Cadastro realizado com sucesso!",Toast.LENGTH_SHORT).show();
+        try{
+            movieDao.save(movie);
+            Toast.makeText(this,"Cadastro realizado com sucesso!",Toast.LENGTH_SHORT).show();
+        }catch (Exception e) {
+            Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
         finish();
     }
