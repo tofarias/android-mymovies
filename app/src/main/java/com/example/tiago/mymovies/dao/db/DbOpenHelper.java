@@ -9,6 +9,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     private static String DATABASE_NAME = "db_mymovies";
     private static int DATABASE_VERSION = 1;
     private static String MOVIE_TABLE = "movie";
+    private static String CATEGORY_TABLE = "category";
+    private static String MOVIE_CATEGORY_TABLE = "movie_category";
 
     private static String sqlCreateMovieTable = "CREATE TABLE "+ DbOpenHelper.MOVIE_TABLE+
                                                 "(" +
@@ -17,6 +19,19 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                                                 "title_pt_br VARCHAR(50)" +
                                                 ")";
 
+    private static String sqlCreateCategoryTable = "CREATE TABLE "+ DbOpenHelper.CATEGORY_TABLE+
+                                                    "(" +
+                                                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                                    "name VARCHAR(50) NOT NULL" +
+                                                    ")";
+
+    private static String sqlCreateMovieCategoryTable = "CREATE TABLE "+ DbOpenHelper.MOVIE_CATEGORY_TABLE+
+            "(" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "movie_id VARCHAR(50) NOT NULL," +
+            "category_id VARCHAR(50) NOT NULL" +
+            ")";
+
     public DbOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -24,13 +39,31 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        db.execSQL(DbOpenHelper.sqlCreateCategoryTable);
         db.execSQL(DbOpenHelper.sqlCreateMovieTable);
+        db.execSQL(DbOpenHelper.sqlCreateMovieCategoryTable);
 
         // CARGA INICIAL PARA TESTES
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Lethal Weapon', 'Máquina Mortifera')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Die Hard', 'Duro de Matar')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('The Blair Witch Project', 'A Bruxa de Blair')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Horrible Bosses', 'Quero Matar Meu Chefe')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Braveheart', 'Coracao Valente')");
+
+        // INSERINDO DADOS PARA A TABELA CATEGORY
+        db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('acao')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('comédia')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('documentário')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('terror')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('ficcao')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('romance')");
+
+        // INSERINDO DADOS PARA O RELACIONAMENTO MOVIE_CATEGORY
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_CATEGORY_TABLE+" ('movie_id', 'category_id') VALUES (1,5)");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_CATEGORY_TABLE+" ('movie_id', 'category_id') VALUES (2,4)");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_CATEGORY_TABLE+" ('movie_id', 'category_id') VALUES (3,3)");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_CATEGORY_TABLE+" ('movie_id', 'category_id') VALUES (4,2)");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_CATEGORY_TABLE+" ('movie_id', 'category_id') VALUES (5,1)");
     }
 
     @Override
@@ -38,8 +71,14 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
         if( oldVersion < newVersion ){
 
-            db.execSQL("DROP TABLE IF EXISTS movie");
+            db.execSQL("DROP TABLE IF EXISTS "+DbOpenHelper.CATEGORY_TABLE);
+            db.execSQL(DbOpenHelper.sqlCreateCategoryTable);
+
+            db.execSQL("DROP TABLE IF EXISTS "+DbOpenHelper.MOVIE_TABLE);
             db.execSQL(DbOpenHelper.sqlCreateMovieTable);
+
+            db.execSQL("DROP TABLE IF EXISTS "+DbOpenHelper.MOVIE_CATEGORY_TABLE);
+            db.execSQL(DbOpenHelper.sqlCreateMovieCategoryTable);
         }
     }
 }
