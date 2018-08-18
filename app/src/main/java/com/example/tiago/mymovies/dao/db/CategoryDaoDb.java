@@ -25,7 +25,7 @@ public class CategoryDaoDb implements CategoryDao {
 
         Cursor cursor = db.query("category",
                 new String[]{"id","name"},
-                null,null,null,null,"id");
+                null,null,null,null,"name");
 
         List<Category> categoriesList = new ArrayList<>();
 

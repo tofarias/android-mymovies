@@ -25,10 +25,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        this.createCategoryRadioButtonsInsideRadioGroup();
+        this.createCategoryRadioButtons();
     }
 
-    public void createCategoryRadioButtonsInsideRadioGroup()
+    public void createCategoryRadioButtons()
     {
         CategoryDaoDb categoryDao = new CategoryDaoDb(this);
         List<Category> categoryList = categoryDao.listAll();
@@ -51,15 +51,31 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public void addMovie(View view){
+    public int getSelectedCategoryId()
+    {
+        final RadioGroup rg = (RadioGroup) findViewById(R.id.rb_categories);
+        int categoryId = 0;
 
+        int selectedRadioButtonID = rg.getCheckedRadioButtonId();
+
+        if (selectedRadioButtonID != -1) {
+
+            RadioButton selectedRadioButton = (RadioButton) findViewById(selectedRadioButtonID);
+            categoryId = selectedRadioButton.getId();
+        }
+
+        return categoryId;
+    }
+
+    public void addMovie(View view)
+    {
         EditText edtTitlePtBr = (EditText) findViewById(R.id.edtTitlePtBr);
         EditText edtTitleEn   = (EditText) findViewById(R.id.edtTitleEn);
 
         String titlePtBr = edtTitlePtBr.getText().toString().trim();
         String titleEn   = edtTitleEn.getText().toString().trim();
 
-        Movie movie = new Movie(titleEn, titlePtBr, new Category("TESTE"));
+        Movie movie = new Movie(titleEn, titlePtBr, new Category( this.getSelectedCategoryId() ));
 
         MovieDao movieDao = new MovieDaoDb(this);
 
