@@ -16,7 +16,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                                                 "(" +
                                                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                                                 "title_en VARCHAR(50)," +
-                                                "title_pt_br VARCHAR(50)" +
+                                                "title_pt_br VARCHAR(50)," +
+                                                "comment VARCHAR(50)" +
                                                 ")";
 
     private static String sqlCreateCategoryTable = "CREATE TABLE "+ DbOpenHelper.CATEGORY_TABLE+
@@ -44,11 +45,11 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(DbOpenHelper.sqlCreateMovieCategoryTable);
 
         // CARGA INICIAL PARA TESTES
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Lethal Weapon', 'Máquina Mortifera')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Die Hard', 'Duro de Matar')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('The Blair Witch Project', 'A Bruxa de Blair')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Horrible Bosses', 'Quero Matar Meu Chefe')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br') VALUES ('Braveheart', 'Coracao Valente')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'comment') VALUES ('Lethal Weapon', 'Máquina Mortifera', 'abc...')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'comment') VALUES ('Die Hard', 'Duro de Matar', 'abc...')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'comment') VALUES ('The Blair Witch Project', 'A Bruxa de Blair', 'abc...')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'comment') VALUES ('Horrible Bosses', 'Quero Matar Meu Chefe', 'abc...')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'comment') VALUES ('Braveheart', 'Coracao Valente', 'abc...')");
 
         // INSERINDO DADOS PARA A TABELA CATEGORY
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('acao')");
