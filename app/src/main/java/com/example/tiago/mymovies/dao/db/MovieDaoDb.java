@@ -43,8 +43,7 @@ public class MovieDaoDb implements MovieDao {
                 null,null,null,null,"id");*/
 
         String rawQuery = "SELECT movie.id, title_en, title_pt_br, category.name as category " +
-                          "FROM movie INNER JOIN movie_category ON (movie_category.movie_id = movie.id) " +
-                                     "INNER JOIN category ON (category.id = movie_category.id)";
+                          "FROM movie INNER JOIN category ON (category.id = movie.category_id)";
 
         Cursor cursor = db.rawQuery( rawQuery, null );
 
@@ -54,12 +53,9 @@ public class MovieDaoDb implements MovieDao {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String titleEn = cursor.getString(cursor.getColumnIndex("title_en"));
             String titlePtBr = cursor.getString(cursor.getColumnIndex("title_pt_br"));
-            String movieCategory = cursor.getString(cursor.getColumnIndex("category"));
+            String category = cursor.getString(cursor.getColumnIndex("category"));
 
-            List<Category> categoryList = new ArrayList<Category>();
-            categoryList.add( new Category(movieCategory) );
-
-            Movie movie = new Movie(id, titleEn, titlePtBr, categoryList);
+            Movie movie = new Movie(id, titleEn, titlePtBr, new Category(category));
             moviesList.add(movie);
         }
         return moviesList;

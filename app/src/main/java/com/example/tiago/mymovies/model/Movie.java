@@ -1,19 +1,17 @@
 package com.example.tiago.mymovies.model;
 
-import java.util.List;
-
 public class Movie {
 
     private String titleEn;
     private String titlePtBr;
     private int id;
-    private List<Category> categoryList;
+    private Category category;
 
-    public Movie(int id, String titleEn, String titlePtBr, List<Category> categoryList) {
+    public Movie(int id, String titleEn, String titlePtBr, Category category) {
         this.id = id;
         this.titleEn = titleEn;
         this.titlePtBr = titlePtBr;
-        this.categoryList = categoryList;
+        this.category = category;
     }
 
     public Movie(String titleEn, String titlePtBr) {
@@ -21,8 +19,8 @@ public class Movie {
         this.titlePtBr = titlePtBr;
     }
 
-    public Movie(String titleEn, String titlePtBr, List<Category> categoryList) {
-        this.categoryList = categoryList;
+    public Movie(String titleEn, String titlePtBr, Category category) {
+        this.category     = category;
         this.titleEn      = titleEn;
         this.titlePtBr    = titlePtBr;
     }
@@ -47,11 +45,11 @@ public class Movie {
         this.titlePtBr = titlePtBr;
     }
 
-    public List<Category> getCategoryList() {
-        return this.categoryList;
+    public Category getCategory() {
+        return this.category;
     }
 
-    public void setCategoryList(List<Category> categoryList) {
-        this.categoryList = categoryList;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

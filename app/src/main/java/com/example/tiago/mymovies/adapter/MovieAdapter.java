@@ -36,7 +36,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
         String movieNameEn = this.movieList.get(position).getTitleEn();
         String movieNamePtBr = this.movieList.get(position).getTitlePtBr();
         int movieId = this.movieList.get(position).getId();
-        String movieCategory = this.movieList.get(position).getCategoryList().get(0).getName();
+        String movieCategory = this.movieList.get(position).getCategory().getName();
 
         holder.movieNameEn.setText(movieNameEn);
         holder.movieNamePtBr.setText(movieNamePtBr);
