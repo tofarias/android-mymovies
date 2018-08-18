@@ -12,6 +12,7 @@ public class MovieHolder extends RecyclerView.ViewHolder{
     public TextView movieNameEn;
     public TextView movieNamePtBr;
     public TextView movieId;
+    public TextView movieCategory;
     public String movie;
 
     public MovieHolder(@NonNull View itemView) {
@@ -19,5 +20,6 @@ public class MovieHolder extends RecyclerView.ViewHolder{
         this.movieNameEn = itemView.findViewById(R.id.movieName);
         this.movieNamePtBr = itemView.findViewById(R.id.movieNamePtBr);
         this.movieId   = itemView.findViewById(R.id.movieId);
+        this.movieCategory = itemView.findViewById(R.id.movieCategory);
     }
 }

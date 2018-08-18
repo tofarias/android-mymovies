@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="79dp"
+        android:layout_marginStart="17dp"
         android:text="MovieName"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -29,8 +29,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="79dp"
         android:text="movieNamePtBr"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/movieCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="movieCategory"
         android:textSize="18sp" />
 
 </RelativeLayout>
