@@ -14,7 +14,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     private static String sqlCreateMovieTable = "CREATE TABLE "+ DbOpenHelper.MOVIE_TABLE+
                                                 "(" +
                                                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                                                "category_id int,"  +
+                                                "category_id int NOT NULL,"  +
                                                 "title_en VARCHAR(50)," +
                                                 "title_pt_br VARCHAR(50)," +
                                                 "comment VARCHAR(100)," +
