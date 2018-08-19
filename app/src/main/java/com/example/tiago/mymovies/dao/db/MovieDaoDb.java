@@ -35,29 +35,52 @@ public class MovieDaoDb implements MovieDao {
         db.close();
     }
 
-    @Override
-    public List<Movie> listAll() {
+    public Movie finById(String id) {
 
         SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
 
-        String rawQuery = "SELECT movie.id, title_en, title_pt_br, category.name as category, comment " +
-                          "FROM movie INNER JOIN category ON (category.id = movie.category_id)" +
-                          "ORDER BY movie.id DESC";
+        Cursor cursor = db.query("movie",
+                new String[]{"id","title_pt_br", "title_en", "comment", "category_id"},
+                "id = ?",new String[]{ id },null,null,null);
 
-        Cursor cursor = db.rawQuery( rawQuery, null );
-
-        List<Movie> moviesList = new ArrayList<>();
-
-        while(cursor.moveToNext()){
-            int id           = cursor.getInt(cursor.getColumnIndex("id"));
-            String titleEn   = cursor.getString(cursor.getColumnIndex("title_en"));
-            String titlePtBr = cursor.getString(cursor.getColumnIndex("title_pt_br"));
-            String category  = cursor.getString(cursor.getColumnIndex("category"));
-            String comment   = cursor.getString(cursor.getColumnIndex("comment"));
-
-            Movie movie = new Movie(id, titleEn, titlePtBr, new Category(category), comment);
-            moviesList.add(movie);
+        if( cursor != null ){
+            cursor.moveToFirst();
         }
-        return moviesList;
+
+        Movie movie = new Movie(
+                cursor.getInt(cursor.getColumnIndex("id")),
+                cursor.getString(cursor.getColumnIndex("title_en")),
+                cursor.getString(cursor.getColumnIndex("title_pt_br")),
+                new Category(cursor.getInt(cursor.getColumnIndex("category_id"))),
+                cursor.getString(cursor.getColumnIndex("comment"))
+            );
+
+            return movie;
+        }
+
+        @Override
+        public List<Movie> listAll() {
+
+            SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
+
+            String rawQuery = "SELECT movie.id, title_en, title_pt_br, category.name as category, category.id category_id, comment " +
+                              "FROM movie INNER JOIN category ON (category.id = movie.category_id)" +
+                              "ORDER BY movie.id DESC";
+
+            Cursor cursor = db.rawQuery( rawQuery, null );
+
+            List<Movie> moviesList = new ArrayList<>();
+
+            while(cursor.moveToNext()){
+                int id           = cursor.getInt(cursor.getColumnIndex("id"));
+                String titleEn   = cursor.getString(cursor.getColumnIndex("title_en"));
+                String titlePtBr = cursor.getString(cursor.getColumnIndex("title_pt_br"));
+                String category  = cursor.getString(cursor.getColumnIndex("category"));
+                String comment   = cursor.getString(cursor.getColumnIndex("comment"));
+
+                Movie movie = new Movie(id, titleEn, titlePtBr, new Category(category), comment);
+                moviesList.add(movie);
+            }
+            return moviesList;
+        }
     }
-}
