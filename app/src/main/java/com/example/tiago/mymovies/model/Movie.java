@@ -8,11 +8,12 @@ public class Movie {
     private int id;
     private Category category;
 
-    public Movie(int id, String titleEn, String titlePtBr, Category category) {
+    public Movie(int id, String titleEn, String titlePtBr, Category category, String comment) {
         this.id = id;
         this.titleEn = titleEn;
         this.titlePtBr = titlePtBr;
         this.category = category;
+        this.comment = comment;
     }
 
     public Movie(String titleEn, String titlePtBr) {

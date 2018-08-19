@@ -40,11 +40,7 @@ public class MovieDaoDb implements MovieDao {
 
         SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
 
-        /*Cursor cursor = db.query("movie",
-                new String[]{"id","title_en","title_pt_br"},
-                null,null,null,null,"id");*/
-
-        String rawQuery = "SELECT movie.id, title_en, title_pt_br, category.name as category " +
+        String rawQuery = "SELECT movie.id, title_en, title_pt_br, category.name as category, comment " +
                           "FROM movie INNER JOIN category ON (category.id = movie.category_id)" +
                           "ORDER BY movie.id DESC";
 
@@ -53,12 +49,13 @@ public class MovieDaoDb implements MovieDao {
         List<Movie> moviesList = new ArrayList<>();
 
         while(cursor.moveToNext()){
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
-            String titleEn = cursor.getString(cursor.getColumnIndex("title_en"));
+            int id           = cursor.getInt(cursor.getColumnIndex("id"));
+            String titleEn   = cursor.getString(cursor.getColumnIndex("title_en"));
             String titlePtBr = cursor.getString(cursor.getColumnIndex("title_pt_br"));
-            String category = cursor.getString(cursor.getColumnIndex("category"));
+            String category  = cursor.getString(cursor.getColumnIndex("category"));
+            String comment   = cursor.getString(cursor.getColumnIndex("comment"));
 
-            Movie movie = new Movie(id, titleEn, titlePtBr, new Category(category));
+            Movie movie = new Movie(id, titleEn, titlePtBr, new Category(category), comment);
             moviesList.add(movie);
         }
         return moviesList;

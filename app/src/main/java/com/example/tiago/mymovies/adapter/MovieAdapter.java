@@ -43,7 +43,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
         holder.movieNamePtBr.setText(movieNamePtBr);
         holder.movieId.setText(String.valueOf(movieId));
         holder.movieCategory.setText(movieCategory);
-        //holder.movieComment.setText(movieComment);
+        holder.movieComment.setText(movieComment);
     }
 
     @Override
