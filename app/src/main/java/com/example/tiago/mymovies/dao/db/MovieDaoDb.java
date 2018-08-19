@@ -50,6 +50,15 @@ public class MovieDaoDb implements MovieDao {
         db.close();
     }
 
+    @Override
+    public void delete(String id) {
+
+        SQLiteDatabase db = this.dbSqlite.getWritableDatabase();
+
+        db.delete("movie","id = ?", new String[]{ id });
+        db.close();
+    }
+
     public Movie finById(String id) {
 
         SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
