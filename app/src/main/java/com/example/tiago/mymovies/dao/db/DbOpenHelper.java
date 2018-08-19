@@ -37,7 +37,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(DbOpenHelper.sqlCreateCategoryTable);
         db.execSQL(DbOpenHelper.sqlCreateMovieTable);
 
-        // INSERINDO DADOS PARA A TABELA CATEGORY
+        // CARGA INICIAL PARA TESTES
+
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('Ação')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('Comédia')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('Documentário')");
@@ -46,7 +47,6 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('Drama')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('Seriado')");
 
-        // CARGA INICIAL PARA TESTES
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment') VALUES ('Lethal Weapon', 'Máquina Mortifera', 6,'abc...')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment') VALUES ('Die Hard', 'Duro de Matar', 5,'abc...')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment') VALUES ('The Blair Witch Project', 'A Bruxa de Blair', 4,'abc...')");
