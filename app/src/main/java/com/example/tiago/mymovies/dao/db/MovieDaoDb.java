@@ -45,7 +45,8 @@ public class MovieDaoDb implements MovieDao {
                 null,null,null,null,"id");*/
 
         String rawQuery = "SELECT movie.id, title_en, title_pt_br, category.name as category " +
-                          "FROM movie INNER JOIN category ON (category.id = movie.category_id)";
+                          "FROM movie INNER JOIN category ON (category.id = movie.category_id)" +
+                          "ORDER BY movie.id DESC";
 
         Cursor cursor = db.rawQuery( rawQuery, null );
 
