@@ -1,5 +1,7 @@
 package com.example.tiago.mymovies;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatRadioButton;
@@ -22,6 +24,7 @@ public class EditActivity extends AppCompatActivity {
 
     public EditText edtTitleEn, edtTitlePtBr, edtMovieId, edtMovieCategory, edtComment;
     private String movieId;
+    private Movie movie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +40,11 @@ public class EditActivity extends AppCompatActivity {
         this.movieId = getIntent().getStringExtra("movie_id");
 
         MovieDaoDb movieDaoDb = new MovieDaoDb(this);
-        Movie movie = movieDaoDb.finById( this.movieId );
+         this.movie = movieDaoDb.finById( this.movieId );
 
-        this.edtTitlePtBr.setText( movie.getTitlePtBr() );
-        this.edtTitleEn.setText( movie.getTitleEn() );
-        this.edtComment.setText( movie.getComment() );
+        this.edtTitlePtBr.setText( this.movie.getTitlePtBr() );
+        this.edtTitleEn.setText( this.movie.getTitleEn() );
+        this.edtComment.setText( this.movie.getComment() );
 
         //
 
@@ -72,12 +75,25 @@ public class EditActivity extends AppCompatActivity {
     }
 
     public void deleteMovie(View v){
-        MovieDaoDb movieDao = new MovieDaoDb(this);
-        movieDao.delete(this.movieId);
 
-        Toast.makeText(this,"Exclusão realizada com sucesso!",Toast.LENGTH_SHORT)
-                .show();
-        finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Excluir registro!");
+        builder.setMessage("Tem certeza que deseja remover o filme "+ this.movie.getTitlePtBr()  +"?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                MovieDaoDb movieDao = new MovieDaoDb(getApplicationContext());
+                movieDao.delete(movieId);
+
+                Toast.makeText(getApplicationContext(),"Exclusão realizada com sucesso!",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("Não",null);
+        builder.show();
     }
 
     public void updateMovie(View view)
