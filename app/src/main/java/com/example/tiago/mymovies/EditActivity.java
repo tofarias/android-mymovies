@@ -71,6 +71,15 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
+    public void deleteMovie(View v){
+        MovieDaoDb movieDao = new MovieDaoDb(this);
+        movieDao.delete(this.movieId);
+
+        Toast.makeText(this,"Exclusão realizada com sucesso!",Toast.LENGTH_SHORT)
+                .show();
+        finish();
+    }
+
     public void updateMovie(View view)
     {
         this.edtTitlePtBr = (EditText) findViewById(R.id.edtTitlePtBr);
