@@ -29,6 +29,7 @@ public class MovieDaoDb implements MovieDao {
         values.put("title_pt_br",movie.getTitlePtBr());
         values.put("title_en",movie.getTitleEn());
         values.put("category_id",movie.getCategory().getId());
+        values.put("comment",movie.getComment());
 
         db.insert("movie",null,values);
         db.close();

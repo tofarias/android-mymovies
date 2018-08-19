@@ -71,11 +71,13 @@ public class RegisterActivity extends AppCompatActivity {
     {
         EditText edtTitlePtBr = (EditText) findViewById(R.id.edtTitlePtBr);
         EditText edtTitleEn   = (EditText) findViewById(R.id.edtTitleEn);
+        EditText edtComment   = (EditText) findViewById(R.id.edtComment);
 
         String titlePtBr = edtTitlePtBr.getText().toString().trim();
         String titleEn   = edtTitleEn.getText().toString().trim();
+        String comment   = edtComment.getText().toString().trim();
 
-        Movie movie = new Movie(titleEn, titlePtBr, new Category( this.getSelectedCategoryId() ));
+        Movie movie = new Movie(titleEn, titlePtBr, new Category( this.getSelectedCategoryId() ), comment);
 
         MovieDao movieDao = new MovieDaoDb(this);
 

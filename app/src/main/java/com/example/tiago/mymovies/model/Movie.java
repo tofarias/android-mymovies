@@ -4,6 +4,7 @@ public class Movie {
 
     private String titleEn;
     private String titlePtBr;
+    private String comment;
     private int id;
     private Category category;
 
@@ -19,10 +20,19 @@ public class Movie {
         this.titlePtBr = titlePtBr;
     }
 
-    public Movie(String titleEn, String titlePtBr, Category category) {
+    public Movie(String titleEn, String titlePtBr, Category category, String comment) {
         this.category     = category;
         this.titleEn      = titleEn;
         this.titlePtBr    = titlePtBr;
+        this.comment      = comment;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public int getId() {

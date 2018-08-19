@@ -13,13 +13,15 @@ public class MovieHolder extends RecyclerView.ViewHolder{
     public TextView movieNamePtBr;
     public TextView movieId;
     public TextView movieCategory;
+    public TextView movieComment;
     public String movie;
 
     public MovieHolder(@NonNull View itemView) {
         super(itemView);
-        this.movieNameEn   = itemView.findViewById(R.id.movieName);
+        this.movieNameEn   = itemView.findViewById(R.id.movieNameEn);
         this.movieNamePtBr = itemView.findViewById(R.id.movieNamePtBr);
         this.movieId       = itemView.findViewById(R.id.movieId);
         this.movieCategory = itemView.findViewById(R.id.movieCategory);
+        //this.movieComment  = itemView.findViewById(R.id.edt);
     }
 }
