@@ -21,7 +21,7 @@ public class MovieDaoDb implements MovieDao {
     }
 
     @Override
-    public void save(Movie movie) {
+    public void insert(Movie movie) {
 
         SQLiteDatabase db = this.dbSqlite.getWritableDatabase();
 

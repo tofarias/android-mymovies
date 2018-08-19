@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MovieDao {
     public List<Movie> listAll();
-    public void save(Movie movie);
+    public void insert(Movie movie);
     public void update(Movie movie);
     public Movie finById(String id);
 }

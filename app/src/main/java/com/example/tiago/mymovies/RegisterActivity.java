@@ -82,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         MovieDao movieDao = new MovieDaoDb(this);
 
         try{
-            movieDao.save(movie);
+            movieDao.insert(movie);
             Toast.makeText(this,"Cadastro realizado com sucesso!",Toast.LENGTH_SHORT).show();
         }catch (Exception e) {
             Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
