@@ -8,7 +8,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.example.tiago.mymovies.dao.MovieDao;
 import com.example.tiago.mymovies.dao.db.CategoryDaoDb;
 import com.example.tiago.mymovies.dao.db.MovieDaoDb;
 import com.example.tiago.mymovies.model.Category;
@@ -19,24 +21,25 @@ import java.util.List;
 public class EditActivity extends AppCompatActivity {
 
     public EditText edtTitleEn, edtTitlePtBr, edtMovieId, edtMovieCategory, edtComment;
+    private String movieId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        edtTitlePtBr = findViewById(R.id.edtTitlePtBr);
-        edtTitleEn = findViewById(R.id.edtTitleEn);
-        edtComment = findViewById(R.id.edtComment);
+        this.edtTitlePtBr = findViewById(R.id.edtTitlePtBr);
+        this.edtTitleEn = findViewById(R.id.edtTitleEn);
+        this.edtComment = findViewById(R.id.edtComment);
 
-        String movieId = getIntent().getStringExtra("movie_id");
+        this.movieId = getIntent().getStringExtra("movie_id");
 
         MovieDaoDb movieDaoDb = new MovieDaoDb(this);
-        Movie movie = movieDaoDb.finById( movieId );
+        Movie movie = movieDaoDb.finById( this.movieId );
 
-        edtTitlePtBr.setText( movie.getTitlePtBr() );
-        edtTitleEn.setText( movie.getTitleEn() );
-        edtComment.setText( movie.getComment() );
+        this.edtTitlePtBr.setText( movie.getTitlePtBr() );
+        this.edtTitleEn.setText( movie.getTitleEn() );
+        this.edtComment.setText( movie.getComment() );
 
         //
 
@@ -64,6 +67,51 @@ public class EditActivity extends AppCompatActivity {
             rbn.setLayoutParams(params);
             rgp.addView(rbn);
         }
+    }
+
+    public void updateMovie(View view)
+    {
+        this.edtTitlePtBr = (EditText) findViewById(R.id.edtTitlePtBr);
+        this.edtTitleEn   = (EditText) findViewById(R.id.edtTitleEn);
+        this.edtComment   = (EditText) findViewById(R.id.edtComment);
+
+        String titlePtBr = this.edtTitlePtBr.getText().toString().trim();
+        String titleEn   = this.edtTitleEn.getText().toString().trim();
+        String comment   = this.edtComment.getText().toString().trim();
+
+        Movie movie = new Movie(Integer.parseInt(this.movieId),
+                                titleEn,
+                                titlePtBr,
+                                new Category( this.getSelectedCategoryId() ),
+                                comment);
+
+        MovieDao movieDao = new MovieDaoDb(this);
+
+        try{
+            movieDao.update(movie);
+            Toast.makeText(this,"Atualização realizada com sucesso!",Toast.LENGTH_SHORT).show();
+        }catch (Exception e) {
+            Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        finish();
+    }
+
+    public int getSelectedCategoryId()
+    {
+        final RadioGroup rg = (RadioGroup) findViewById(R.id.rb_categories);
+        int categoryId = 0;
+
+        int selectedRadioButtonID = rg.getCheckedRadioButtonId();
+
+        if (selectedRadioButtonID != -1) {
+
+            RadioButton selectedRadioButton = (RadioButton) findViewById(selectedRadioButtonID);
+            categoryId = selectedRadioButton.getId();
+        }
+
+        return categoryId;
     }
 
     public void cancelEdition(View view){
