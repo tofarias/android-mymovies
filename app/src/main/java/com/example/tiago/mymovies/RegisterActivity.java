@@ -25,6 +25,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        EditText edtTitlePtBr = findViewById(R.id.edtTitlePtBr);
+        edtTitlePtBr.requestFocus();
+
         this.createCategoryRadioButtons();
     }
 

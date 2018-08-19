@@ -32,6 +32,8 @@ public class EditActivity extends AppCompatActivity {
         this.edtTitleEn = findViewById(R.id.edtTitleEn);
         this.edtComment = findViewById(R.id.edtComment);
 
+        this.edtTitlePtBr.requestFocus();
+
         this.movieId = getIntent().getStringExtra("movie_id");
 
         MovieDaoDb movieDaoDb = new MovieDaoDb(this);
