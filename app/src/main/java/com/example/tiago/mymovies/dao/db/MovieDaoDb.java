@@ -35,6 +35,21 @@ public class MovieDaoDb implements MovieDao {
         db.close();
     }
 
+    @Override
+    public void update(Movie movie) {
+
+        SQLiteDatabase db = this.dbSqlite.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("title_pt_br",movie.getTitlePtBr());
+        values.put("title_en",movie.getTitleEn());
+        values.put("category_id",movie.getCategory().getId());
+        values.put("comment",movie.getComment());
+
+        db.update("movie",values,"id = ?",new String[]{ Integer.toString(movie.getId()) });
+        db.close();
+    }
+
     public Movie finById(String id) {
 
         SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
