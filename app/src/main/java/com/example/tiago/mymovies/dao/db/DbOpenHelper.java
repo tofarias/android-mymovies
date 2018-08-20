@@ -6,10 +6,23 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbOpenHelper extends SQLiteOpenHelper {
 
-    private static String DATABASE_NAME = "db_mymovies";
+    private static String DATABASE_NAME = "db_myfavmovies";
     private static int DATABASE_VERSION = 1;
     private static String MOVIE_TABLE = "movie";
     private static String CATEGORY_TABLE = "category";
+    private static String MOVIE_SCORE_TABLE = "movie_score";
+
+    private static String sqlCreateMovieScoreTable = "CREATE TABLE "+ DbOpenHelper.MOVIE_SCORE_TABLE+
+                                                    "(" +
+                                                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                                    "movie_id int NOT NULL,"  +
+                                                    "actors_score INT  NOT NULL,"  +
+                                                    "duration_score INT  NOT NULL,"  +
+                                                    "story_score INT  NOT NULL,"  +
+                                                    "final_story_score INT  NOT NULL,"  +
+                                                    "music_score INT  NOT NULL,"  +
+                                                    "FOREIGN KEY(movie_id) REFERENCES movie(id)"+
+                                                    ")";
 
     private static String sqlCreateMovieTable = "CREATE TABLE "+ DbOpenHelper.MOVIE_TABLE+
                                                 "(" +
@@ -18,6 +31,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                                                 "title_en VARCHAR(50) UNIQUE," +
                                                 "title_pt_br VARCHAR(50) UNIQUE," +
                                                 "comment VARCHAR(100)," +
+                                                "release_year CHAR(4) NOT NULL,"  +
                                                 "FOREIGN KEY(category_id) REFERENCES category(id)"+
                                                 ")";
 
@@ -36,6 +50,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL(DbOpenHelper.sqlCreateCategoryTable);
         db.execSQL(DbOpenHelper.sqlCreateMovieTable);
+        db.execSQL(DbOpenHelper.sqlCreateMovieScoreTable);
 
         // CARGA INICIAL PARA TESTES
 
@@ -47,12 +62,19 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('Drama')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('Seriado')");
 
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment') VALUES ('Lethal Weapon', 'Máquina Mortifera', 6,'abc...')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment') VALUES ('Die Hard', 'Duro de Matar', 5,'abc...')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment') VALUES ('The Blair Witch Project', 'A Bruxa de Blair', 4,'abc...')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment') VALUES ('Horrible Bosses', 'Quero Matar Meu Chefe', 3,'abc...')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment') VALUES ('Braveheart', 'Coracao Valente', 2,'abc...')");
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment') VALUES ('The Green Mile', 'A espera de um milagre', 1,'abc...')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year') VALUES ('Lethal Weapon 1', 'Máquina Mortifera 1', 6,'...', '1987')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year') VALUES ('Die Hard 1', 'Duro de Matar 1', 5,'...', '1988')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year') VALUES ('The Blair Witch Project', 'A Bruxa de Blair', 4,'...', '1999')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year') VALUES ('Horrible Bosses 1', 'Quero Matar Meu Chefe 1', 3,'...', '2011')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year') VALUES ('Braveheart', 'Coracao Valente', 2,'abc...', '1995')");
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year') VALUES ('The Green Mile', 'A espera de um milagre', 1,'...', '1999')");
+
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(1, 8, 9, 10, 7, 8)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(2, 8, 9, 10, 7, 8)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(3, 8, 9, 10, 7, 8)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(4, 8, 9, 10, 7, 8)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(5, 8, 9, 10, 7, 8)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(6, 8, 9, 10, 7, 8)" );
     }
 
     @Override
@@ -65,6 +87,9 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
             db.execSQL("DROP TABLE IF EXISTS "+DbOpenHelper.MOVIE_TABLE);
             db.execSQL(DbOpenHelper.sqlCreateMovieTable);
+
+            db.execSQL("DROP TABLE IF EXISTS "+DbOpenHelper.MOVIE_SCORE_TABLE);
+            db.execSQL(DbOpenHelper.sqlCreateMovieScoreTable);
         }
     }
 }
