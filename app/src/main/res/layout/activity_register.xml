@@ -59,6 +59,19 @@
             android:id="@+id/textTitleEn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Ano Lançamento:"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTitleEn" />
+
+        <TextView
+            android:id="@+id/textTitleEn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -71,15 +84,15 @@
         <RadioGroup
             android:id="@+id/rb_categories"
             android:layout_width="368dp"
-            android:layout_height="168dp"
+            android:layout_height="172dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtTitleEn">
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
         </RadioGroup>
 
@@ -87,11 +100,10 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:text="Gênero:"
-            app:layout_constraintBottom_toTopOf="@+id/rb_categories"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtReleaseYear" />
 
         <TextView
             android:id="@+id/textView2"
@@ -156,6 +168,17 @@
             app:layout_constraintHorizontal_bias="0.464"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edtComment" />
+
+        <EditText
+            android:id="@+id/edtReleaseYear"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleEn" />
 
     </android.support.constraint.ConstraintLayout>
 

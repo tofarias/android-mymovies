@@ -17,6 +17,7 @@ public class MovieHolder extends RecyclerView.ViewHolder{
     public TextView movieId;
     public TextView movieCategory;
     public TextView movieComment;
+    public TextView movieReleaseYear;
 
     public MovieHolder(@NonNull final View itemView) {
         super(itemView);
@@ -26,6 +27,7 @@ public class MovieHolder extends RecyclerView.ViewHolder{
         this.movieId       = itemView.findViewById(R.id.movieId);
         this.movieCategory = itemView.findViewById(R.id.movieCategory);
         this.movieComment  = itemView.findViewById(R.id.movieComment);
+        this.movieReleaseYear = itemView.findViewById(R.id.movieReleaseYear);
 
         itemView.setOnClickListener(new View.OnClickListener(){
 

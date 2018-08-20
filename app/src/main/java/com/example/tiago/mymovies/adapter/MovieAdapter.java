@@ -38,12 +38,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
         int movieId = this.movieList.get(position).getId();
         String movieCategory = this.movieList.get(position).getCategory().getName();
         String movieComment = this.movieList.get(position).getComment();
+        String movieReleaseYear = this.movieList.get(position).getReleaseYear();
 
         holder.movieNameEn.setText(movieNameEn);
         holder.movieNamePtBr.setText(movieNamePtBr);
         holder.movieId.setText(String.valueOf(movieId));
         holder.movieCategory.setText(movieCategory);
         holder.movieComment.setText(movieComment);
+        holder.movieReleaseYear.setText(movieReleaseYear);
     }
 
     @Override

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
 
-    public EditText edtTitleEn, edtTitlePtBr, edtMovieId, edtMovieCategory, edtComment;
+    public EditText edtTitleEn, edtTitlePtBr, edtMovieId, edtMovieCategory, edtComment, edtReleaseYear;
     private String movieId;
     private Movie movie;
 
@@ -34,6 +34,7 @@ public class EditActivity extends AppCompatActivity {
         this.edtTitlePtBr = findViewById(R.id.edtTitlePtBr);
         this.edtTitleEn = findViewById(R.id.edtTitleEn);
         this.edtComment = findViewById(R.id.edtComment);
+        this.edtReleaseYear = findViewById(R.id.edtReleaseYear);
 
         this.edtTitlePtBr.requestFocus();
 
@@ -45,6 +46,7 @@ public class EditActivity extends AppCompatActivity {
         this.edtTitlePtBr.setText( this.movie.getTitlePtBr() );
         this.edtTitleEn.setText( this.movie.getTitleEn() );
         this.edtComment.setText( this.movie.getComment() );
+        this.edtReleaseYear.setText( this.movie.getReleaseYear() );
 
         //
 
@@ -101,16 +103,18 @@ public class EditActivity extends AppCompatActivity {
         this.edtTitlePtBr = (EditText) findViewById(R.id.edtTitlePtBr);
         this.edtTitleEn   = (EditText) findViewById(R.id.edtTitleEn);
         this.edtComment   = (EditText) findViewById(R.id.edtComment);
+        this.edtReleaseYear = (EditText) findViewById(R.id.edtReleaseYear);
 
         String titlePtBr = this.edtTitlePtBr.getText().toString().trim();
         String titleEn   = this.edtTitleEn.getText().toString().trim();
         String comment   = this.edtComment.getText().toString().trim();
+        String releaseYear = this.edtReleaseYear.getText().toString().trim();
 
         Movie movie = new Movie(Integer.parseInt(this.movieId),
                                 titleEn,
                                 titlePtBr,
                                 new Category( this.getSelectedCategoryId() ),
-                                comment);
+                                comment,releaseYear);
 
         MovieDao movieDao = new MovieDaoDb(this);
 

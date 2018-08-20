@@ -30,6 +30,7 @@ public class MovieDaoDb implements MovieDao {
         values.put("title_en",movie.getTitleEn());
         values.put("category_id",movie.getCategory().getId());
         values.put("comment",movie.getComment());
+        values.put("release_year",movie.getReleaseYear());
 
         db.insert("movie",null,values);
         db.close();
@@ -45,6 +46,7 @@ public class MovieDaoDb implements MovieDao {
         values.put("title_en",movie.getTitleEn());
         values.put("category_id",movie.getCategory().getId());
         values.put("comment",movie.getComment());
+        values.put("release_year",movie.getReleaseYear());
 
         db.update("movie",values,"id = ?",new String[]{ Integer.toString(movie.getId()) });
         db.close();
@@ -64,7 +66,7 @@ public class MovieDaoDb implements MovieDao {
         SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
 
         Cursor cursor = db.query("movie",
-                new String[]{"id","title_pt_br", "title_en", "comment", "category_id"},
+                new String[]{"id","title_pt_br", "title_en", "comment", "category_id", "release_year"},
                 "id = ?",new String[]{ id },null,null,null);
 
         if( cursor != null ){
@@ -76,7 +78,8 @@ public class MovieDaoDb implements MovieDao {
                 cursor.getString(cursor.getColumnIndex("title_en")),
                 cursor.getString(cursor.getColumnIndex("title_pt_br")),
                 new Category(cursor.getInt(cursor.getColumnIndex("category_id"))),
-                cursor.getString(cursor.getColumnIndex("comment"))
+                cursor.getString(cursor.getColumnIndex("comment")),
+                cursor.getString(cursor.getColumnIndex("release_year"))
             );
 
             return movie;
@@ -87,7 +90,7 @@ public class MovieDaoDb implements MovieDao {
 
             SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
 
-            String rawQuery = "SELECT movie.id, title_en, title_pt_br, category.name as category, category.id category_id, comment " +
+            String rawQuery = "SELECT movie.id, title_en, title_pt_br, category.name as category, category.id category_id, comment, release_year " +
                               "FROM movie INNER JOIN category ON (category.id = movie.category_id)" +
                               "ORDER BY movie.id DESC";
 
@@ -101,8 +104,9 @@ public class MovieDaoDb implements MovieDao {
                 String titlePtBr = cursor.getString(cursor.getColumnIndex("title_pt_br"));
                 String category  = cursor.getString(cursor.getColumnIndex("category"));
                 String comment   = cursor.getString(cursor.getColumnIndex("comment"));
+                String releaseYear   = cursor.getString(cursor.getColumnIndex("release_year"));
 
-                Movie movie = new Movie(id, titleEn, titlePtBr, new Category(category), comment);
+                Movie movie = new Movie(id, titleEn, titlePtBr, new Category(category), comment, releaseYear);
                 moviesList.add(movie);
             }
             return moviesList;

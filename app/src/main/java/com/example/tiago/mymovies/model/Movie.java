@@ -7,13 +7,15 @@ public class Movie {
     private String comment;
     private int id;
     private Category category;
+    private String releaseYear;
 
-    public Movie(int id, String titleEn, String titlePtBr, Category category, String comment) {
+    public Movie(int id, String titleEn, String titlePtBr, Category category, String comment, String releaseYear) {
         this.id = id;
         this.titleEn = titleEn;
         this.titlePtBr = titlePtBr;
         this.category = category;
         this.comment = comment;
+        this.releaseYear = releaseYear;
     }
 
     public Movie(String titleEn, String titlePtBr) {
@@ -21,11 +23,20 @@ public class Movie {
         this.titlePtBr = titlePtBr;
     }
 
-    public Movie(String titleEn, String titlePtBr, Category category, String comment) {
+    public Movie(String titleEn, String titlePtBr, Category category, String comment, String releaseYear) {
         this.category     = category;
         this.titleEn      = titleEn;
         this.titlePtBr    = titlePtBr;
         this.comment      = comment;
+        this.releaseYear  = releaseYear;
+    }
+
+    public String getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public String getComment() {

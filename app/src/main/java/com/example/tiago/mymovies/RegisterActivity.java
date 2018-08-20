@@ -75,12 +75,14 @@ public class RegisterActivity extends AppCompatActivity {
         EditText edtTitlePtBr = (EditText) findViewById(R.id.edtTitlePtBr);
         EditText edtTitleEn   = (EditText) findViewById(R.id.edtTitleEn);
         EditText edtComment   = (EditText) findViewById(R.id.edtComment);
+        EditText edtReleaseYear = (EditText) findViewById(R.id.edtReleaseYear);
 
-        String titlePtBr = edtTitlePtBr.getText().toString().trim();
-        String titleEn   = edtTitleEn.getText().toString().trim();
-        String comment   = edtComment.getText().toString().trim();
+        String titlePtBr   = edtTitlePtBr.getText().toString().trim();
+        String titleEn     = edtTitleEn.getText().toString().trim();
+        String comment     = edtComment.getText().toString().trim();
+        String releaseYear = edtReleaseYear.getText().toString().trim();
 
-        Movie movie = new Movie(titleEn, titlePtBr, new Category( this.getSelectedCategoryId() ), comment);
+        Movie movie = new Movie(titleEn, titlePtBr, new Category( this.getSelectedCategoryId() ), comment, releaseYear);
 
         MovieDao movieDao = new MovieDaoDb(this);
 
