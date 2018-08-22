@@ -15,12 +15,12 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     private static String sqlCreateMovieScoreTable = "CREATE TABLE "+ DbOpenHelper.MOVIE_SCORE_TABLE+
                                                     "(" +
                                                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                                                    "movie_id int NOT NULL,"  +
-                                                    "actors_score INT  NOT NULL,"  +
-                                                    "duration_score INT  NOT NULL,"  +
-                                                    "story_score INT  NOT NULL,"  +
-                                                    "final_story_score INT  NOT NULL,"  +
-                                                    "music_score INT  NOT NULL,"  +
+                                                    "movie_id int NOT NULL UNIQUE,"  +
+                                                    "actors_score FLOAT NOT NULL,"  +
+                                                    "duration_score FLOAT NOT NULL,"  +
+                                                    "story_score FLOAT NOT NULL,"  +
+                                                    "final_story_score FLOAT NOT NULL,"  +
+                                                    "music_score FLOAT NOT NULL,"  +
                                                     "FOREIGN KEY(movie_id) REFERENCES movie(id)"+
                                                     ")";
 
@@ -69,12 +69,12 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year') VALUES ('Braveheart', 'Coracao Valente', 2,'abc...', '1995')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year') VALUES ('The Green Mile', 'A espera de um milagre', 1,'...', '1999')");
 
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(1, 8, 9, 10, 7, 8)" );
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(2, 8, 9, 10, 7, 8)" );
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(3, 8, 9, 10, 7, 8)" );
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(4, 8, 9, 10, 7, 8)" );
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(5, 8, 9, 10, 7, 8)" );
-        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(6, 8, 9, 10, 7, 8)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(6, 3, 5, 5, 2, 2)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(5, 4, 4, 4, 3, 3)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(4, 5, 2, 3, 3, 2)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(3, 3, 2, 4, 4, 1)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(2, 2, 3, 2, 5, 1)" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_SCORE_TABLE +" ('movie_id', 'actors_score', 'duration_score', 'story_score', 'final_story_score', 'music_score') VALUES(1, 4, 5, 1, 3, 2)" );
     }
 
     @Override
