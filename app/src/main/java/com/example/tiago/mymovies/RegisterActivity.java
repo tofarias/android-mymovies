@@ -3,22 +3,28 @@ package com.example.tiago.mymovies;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatRadioButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.tiago.mymovies.dao.MovieDao;
 import com.example.tiago.mymovies.dao.db.CategoryDaoDb;
 import com.example.tiago.mymovies.dao.db.MovieDaoDb;
+import com.example.tiago.mymovies.dao.db.MovieScoreDaoDb;
 import com.example.tiago.mymovies.model.Category;
 import com.example.tiago.mymovies.model.Movie;
+import com.example.tiago.mymovies.model.MovieScore;
 
 import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    RatingBar rbActorScore, rbMusicScore, rbStoryScore, rbFinalStoryScore, rbDurationScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,19 +88,42 @@ public class RegisterActivity extends AppCompatActivity {
         String comment     = edtComment.getText().toString().trim();
         String releaseYear = edtReleaseYear.getText().toString().trim();
 
+        this.rbActorScore       = (RatingBar) findViewById(R.id.rbActorScore);
+        this.rbMusicScore       = (RatingBar) findViewById(R.id.rbMusicScore);
+        this.rbDurationScore    = (RatingBar) findViewById(R.id.rbDurationScore);
+        this.rbFinalStoryScore  = (RatingBar) findViewById(R.id.rbFinalStoryScore);
+        this.rbStoryScore       = (RatingBar) findViewById(R.id.rbStoryScore);
+
         Movie movie = new Movie(titleEn, titlePtBr, new Category( this.getSelectedCategoryId() ), comment, releaseYear);
 
         MovieDao movieDao = new MovieDaoDb(this);
 
         try{
-            movieDao.insert(movie);
+
+            long movieId = movieDao.insert(movie);
+
+            MovieScore movieScore = new MovieScore(movie,
+                                                   this.rbActorScore.getRating(),
+                                                   this.rbMusicScore.getRating(),
+                                                   this.rbDurationScore.getRating(),
+                                                   this.rbFinalStoryScore.getRating(),
+                                                   this.rbStoryScore.getRating()
+                                                  );
+
+            MovieScoreDaoDb movieScoreDaoDb = new MovieScoreDaoDb(this);
+            long idMovieScore = movieScoreDaoDb.insert(movieScore);
+
             Toast.makeText(this,"Cadastro realizado com sucesso!",Toast.LENGTH_SHORT).show();
+
+            finish();
+
         }catch (Exception e) {
             Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
             toast.show();
+            Log.d("addMovie", e.getMessage());
         }
 
-        finish();
+
     }
 
     public void cancelRegistration(View view){

@@ -10,19 +10,23 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.tiago.mymovies.dao.MovieDao;
 import com.example.tiago.mymovies.dao.db.CategoryDaoDb;
 import com.example.tiago.mymovies.dao.db.MovieDaoDb;
+import com.example.tiago.mymovies.dao.db.MovieScoreDaoDb;
 import com.example.tiago.mymovies.model.Category;
 import com.example.tiago.mymovies.model.Movie;
+import com.example.tiago.mymovies.model.MovieScore;
 
 import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
 
     public EditText edtTitleEn, edtTitlePtBr, edtMovieId, edtMovieCategory, edtComment, edtReleaseYear;
+    RatingBar rbActorScore, rbMusicScore, rbStoryScore, rbFinalStoryScore, rbDurationScore;
     private String movieId;
     private Movie movie;
 
@@ -74,6 +78,23 @@ public class EditActivity extends AppCompatActivity {
             rbn.setLayoutParams(params);
             rgp.addView(rbn);
         }
+
+        //
+
+        this.rbActorScore       = (RatingBar) findViewById(R.id.rbActorScore);
+        this.rbMusicScore       = (RatingBar) findViewById(R.id.rbMusicScore);
+        this.rbDurationScore    = (RatingBar) findViewById(R.id.rbDurationScore);
+        this.rbFinalStoryScore  = (RatingBar) findViewById(R.id.rbFinalStoryScore);
+        this.rbStoryScore       = (RatingBar) findViewById(R.id.rbStoryScore);
+
+        MovieScoreDaoDb movieScoreDaoDb = new MovieScoreDaoDb(this);
+        MovieScore movieScore = movieScoreDaoDb.findByMovieId( this.movieId );
+
+        this.rbActorScore.setRating( movieScore.getActorsScore() );
+        this.rbMusicScore.setRating( movieScore.getMusicScore() );
+        this.rbDurationScore.setRating( movieScore.getDurationScore() );
+        this.rbFinalStoryScore.setRating( movieScore.getFinalStoryScore() );
+        this.rbStoryScore.setRating( movieScore.getStoryScore() );
     }
 
     public void deleteMovie(View v){
@@ -85,6 +106,9 @@ public class EditActivity extends AppCompatActivity {
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                MovieScoreDaoDb movieScoreDaoDb = new MovieScoreDaoDb(getApplicationContext());
+                movieScoreDaoDb.delete(movieId);
 
                 MovieDaoDb movieDao = new MovieDaoDb(getApplicationContext());
                 movieDao.delete(movieId);
@@ -116,10 +140,36 @@ public class EditActivity extends AppCompatActivity {
                                 new Category( this.getSelectedCategoryId() ),
                                 comment,releaseYear);
 
-        MovieDao movieDao = new MovieDaoDb(this);
+        MovieDao movieDaoDb = new MovieDaoDb(this);
+
+        //
+
+        this.rbActorScore       = (RatingBar) findViewById(R.id.rbActorScore);
+        this.rbMusicScore       = (RatingBar) findViewById(R.id.rbMusicScore);
+        this.rbDurationScore    = (RatingBar) findViewById(R.id.rbDurationScore);
+        this.rbFinalStoryScore  = (RatingBar) findViewById(R.id.rbFinalStoryScore);
+        this.rbStoryScore       = (RatingBar) findViewById(R.id.rbStoryScore);
+
+        Float actorScore = this.rbActorScore.getRating();
+        Float musicScore   = this.rbMusicScore.getRating();
+        Float durationScore   = this.rbDurationScore.getRating();
+        Float finalStoryScore = this.rbFinalStoryScore.getRating();
+        Float storyScore = this.rbStoryScore.getRating();
+
+        MovieScoreDaoDb movieScoreDaoDb = new MovieScoreDaoDb(this);
+
+        MovieScore movieScore = new MovieScore(movie,
+                                                actorScore,
+                                                musicScore,
+                                                durationScore,
+                                                finalStoryScore,
+                                                storyScore
+                                                );
 
         try{
-            movieDao.update(movie);
+            movieDaoDb.update(movie);
+            movieScoreDaoDb.update(movieScore);
+
             Toast.makeText(this,"Atualização realizada com sucesso!",Toast.LENGTH_SHORT).show();
         }catch (Exception e) {
             Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
