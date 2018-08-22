@@ -21,7 +21,7 @@ public class MovieDaoDb implements MovieDao {
     }
 
     @Override
-    public void insert(Movie movie) {
+    public long insert(Movie movie) {
 
         SQLiteDatabase db = this.dbSqlite.getWritableDatabase();
 
@@ -32,8 +32,10 @@ public class MovieDaoDb implements MovieDao {
         values.put("comment",movie.getComment());
         values.put("release_year",movie.getReleaseYear());
 
-        db.insert("movie",null,values);
+        long id = db.insert("movie",null,values);
         db.close();
+
+        return id;
     }
 
     @Override
