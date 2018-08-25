@@ -8,14 +8,16 @@ public class Movie {
     private int id;
     private Category category;
     private String releaseYear;
+    private WatchedWhere watchedWhere;
 
-    public Movie(int id, String titleEn, String titlePtBr, Category category, String comment, String releaseYear) {
-        this.id = id;
+    public Movie(int id, String titleEn, String titlePtBr, String comment, Category category, String releaseYear, WatchedWhere watchedWhere) {
         this.titleEn = titleEn;
         this.titlePtBr = titlePtBr;
-        this.category = category;
         this.comment = comment;
+        this.id = id;
+        this.category = category;
         this.releaseYear = releaseYear;
+        this.watchedWhere = watchedWhere;
     }
 
     public Movie(String titleEn, String titlePtBr) {
@@ -23,12 +25,14 @@ public class Movie {
         this.titlePtBr = titlePtBr;
     }
 
-    public Movie(String titleEn, String titlePtBr, Category category, String comment, String releaseYear) {
-        this.category     = category;
-        this.titleEn      = titleEn;
-        this.titlePtBr    = titlePtBr;
-        this.comment      = comment;
-        this.releaseYear  = releaseYear;
+    public Movie(String titleEn, String titlePtBr, Category category, String comment, String releaseYear, WatchedWhere watchedWhere) {
+        this.titleEn = titleEn;
+        this.titlePtBr = titlePtBr;
+        this.comment = comment;
+        this.id = id;
+        this.category = category;
+        this.releaseYear = releaseYear;
+        this.watchedWhere = watchedWhere;
     }
 
     public String getReleaseYear() {
@@ -77,5 +81,13 @@ public class Movie {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public WatchedWhere getWatchedWhere() {
+        return watchedWhere;
+    }
+
+    public void setWatchedWhere(WatchedWhere watchedWhere) {
+        this.watchedWhere = watchedWhere;
     }
 }

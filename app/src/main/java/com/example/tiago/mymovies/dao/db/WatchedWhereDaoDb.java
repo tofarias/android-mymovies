@@ -10,11 +10,11 @@ import com.example.tiago.mymovies.model.WatchedWhere;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WatchedWhereDb implements WatchedWhereDao {
+public class WatchedWhereDaoDb implements WatchedWhereDao {
 
     private DbOpenHelper dbSqlite;
 
-    public WatchedWhereDb(Context context) {
+    public WatchedWhereDaoDb(Context context) {
         this.dbSqlite = new DbOpenHelper(context);
     }
 
@@ -25,7 +25,7 @@ public class WatchedWhereDb implements WatchedWhereDao {
 
         Cursor cursor = db.query("watched_where",
                 new String[]{"id","name"},
-                null,null,null,null,"name");
+                null,null,null,null,"id");
 
         List<WatchedWhere> watchedWhereList = new ArrayList<>();
 

@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tiago.mymovies.Validation.RegisterValidation;
@@ -17,9 +19,11 @@ import com.example.tiago.mymovies.dao.MovieDao;
 import com.example.tiago.mymovies.dao.db.CategoryDaoDb;
 import com.example.tiago.mymovies.dao.db.MovieDaoDb;
 import com.example.tiago.mymovies.dao.db.MovieScoreDaoDb;
+import com.example.tiago.mymovies.dao.db.WatchedWhereDaoDb;
 import com.example.tiago.mymovies.model.Category;
 import com.example.tiago.mymovies.model.Movie;
 import com.example.tiago.mymovies.model.MovieScore;
+import com.example.tiago.mymovies.model.WatchedWhere;
 
 import java.util.List;
 
@@ -27,6 +31,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     RatingBar rbActorScore, rbMusicScore, rbStoryScore, rbFinalStoryScore, rbDurationScore;
     EditText edtTitlePtBr, edtTitleEn, edtComment, edtReleaseYear;
+    Spinner spinnerWatchedWhere;
+    List<WatchedWhere> watchedWhereList;
+    RadioGroup radioGroupCategories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,17 @@ public class RegisterActivity extends AppCompatActivity {
         edtTitlePtBr.requestFocus();
 
         this.createCategoryRadioButtons();
+        this.populateSpinner();
+    }
+
+    private void populateSpinner() {
+        WatchedWhereDaoDb watchedWhereDao = new WatchedWhereDaoDb(this);
+        this.watchedWhereList = watchedWhereDao.listAll();
+
+        ArrayAdapter<WatchedWhere> adapter = new ArrayAdapter<WatchedWhere>(this, android.R.layout.simple_list_item_1, watchedWhereList);
+
+        this.spinnerWatchedWhere = (Spinner) findViewById(R.id.spinnerWatchedWhere);
+        this.spinnerWatchedWhere.setAdapter(adapter);
     }
 
     public void createCategoryRadioButtons()
@@ -62,12 +80,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public int getSelectedCategoryId()
+    public int getRadioButtonSelectedCategoryId()
     {
-        final RadioGroup rg = (RadioGroup) findViewById(R.id.rb_categories);
+        this.radioGroupCategories = (RadioGroup) findViewById(R.id.rb_categories);
         int categoryId = 0;
 
-        int selectedRadioButtonID = rg.getCheckedRadioButtonId();
+        int selectedRadioButtonID = radioGroupCategories.getCheckedRadioButtonId();
 
         if (selectedRadioButtonID != -1) {
 
@@ -76,6 +94,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         return categoryId;
+    }
+
+    public int getSpinnerWatchedWhereSelectedId()
+    {
+        return this.watchedWhereList.get( this.spinnerWatchedWhere.getSelectedItemPosition() ).getId();
     }
 
     public void addMovie(View view)
@@ -107,10 +130,14 @@ public class RegisterActivity extends AppCompatActivity {
         formValidation.validateDurationScore( rbDurationScore );
         formValidation.validateFinalStoryScore( rbFinalStoryScore );
         formValidation.validateStoryScore( rbStoryScore );
+        formValidation.validateCategory( (RadioGroup) findViewById(R.id.rb_categories) );
 
         if( formValidation.isValid() ){
 
-            Movie movie = new Movie(titleEn, titlePtBr, new Category( this.getSelectedCategoryId() ), comment, releaseYear);
+            Category category = new Category(this.getRadioButtonSelectedCategoryId());
+            WatchedWhere watchedWhere = new WatchedWhere( this.getSpinnerWatchedWhereSelectedId() );
+
+            Movie movie = new Movie(titleEn, titlePtBr, category, comment, releaseYear, watchedWhere);
 
             MovieDao movieDao = new MovieDaoDb(this);
 

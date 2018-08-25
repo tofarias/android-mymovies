@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tiago.mymovies.Validation.EditValidation;
@@ -18,9 +20,11 @@ import com.example.tiago.mymovies.dao.MovieDao;
 import com.example.tiago.mymovies.dao.db.CategoryDaoDb;
 import com.example.tiago.mymovies.dao.db.MovieDaoDb;
 import com.example.tiago.mymovies.dao.db.MovieScoreDaoDb;
+import com.example.tiago.mymovies.dao.db.WatchedWhereDaoDb;
 import com.example.tiago.mymovies.model.Category;
 import com.example.tiago.mymovies.model.Movie;
 import com.example.tiago.mymovies.model.MovieScore;
+import com.example.tiago.mymovies.model.WatchedWhere;
 
 import java.util.List;
 
@@ -30,6 +34,8 @@ public class EditActivity extends AppCompatActivity {
     RatingBar rbActorScore, rbMusicScore, rbStoryScore, rbFinalStoryScore, rbDurationScore;
     private String movieId;
     private Movie movie;
+    Spinner spinnerWatchedWhere;
+    List<WatchedWhere> watchedWhereList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +85,10 @@ public class EditActivity extends AppCompatActivity {
             rbn.setLayoutParams(params);
             rgp.addView(rbn);
         }
+
+        //
+
+        this.populateSpinner();
 
         //
 
@@ -135,16 +145,6 @@ public class EditActivity extends AppCompatActivity {
         String comment   = this.edtComment.getText().toString().trim();
         String releaseYear = this.edtReleaseYear.getText().toString().trim();
 
-        Movie movie = new Movie(Integer.parseInt(this.movieId),
-                                titleEn,
-                                titlePtBr,
-                                new Category( this.getSelectedCategoryId() ),
-                                comment,releaseYear);
-
-        MovieDao movieDaoDb = new MovieDaoDb(this);
-
-        //
-
         this.rbActorScore       = (RatingBar) findViewById(R.id.rbActorScore);
         this.rbMusicScore       = (RatingBar) findViewById(R.id.rbMusicScore);
         this.rbDurationScore    = (RatingBar) findViewById(R.id.rbDurationScore);
@@ -166,11 +166,22 @@ public class EditActivity extends AppCompatActivity {
         formValidation.validateDurationScore( rbDurationScore );
         formValidation.validateFinalStoryScore( rbFinalStoryScore );
         formValidation.validateStoryScore( rbStoryScore );
+        formValidation.validateCategory( (RadioGroup) findViewById(R.id.rb_categories) );
 
         if( formValidation.isValid() ) {
 
-            MovieScoreDaoDb movieScoreDaoDb = new MovieScoreDaoDb(this);
+            Movie movie = new Movie(Integer.parseInt(this.movieId),
+                                            titleEn,
+                                            titlePtBr,
+                                            comment,
+                                            new Category( this.getRadioButtonSelectedCategoryId() ),
+                                            releaseYear,
+                                            new WatchedWhere( this.getSpinnerWatchedWhereSelectedId() )
+                                    );
 
+            MovieDao movieDaoDb = new MovieDaoDb(this);
+
+            MovieScoreDaoDb movieScoreDaoDb = new MovieScoreDaoDb(this);
             MovieScore movieScore = new MovieScore(movie,
                     actorScore,
                     musicScore,
@@ -192,7 +203,12 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
-    public int getSelectedCategoryId()
+    public int getSpinnerWatchedWhereSelectedId()
+    {
+        return this.watchedWhereList.get( this.spinnerWatchedWhere.getSelectedItemPosition() ).getId();
+    }
+
+    public int getRadioButtonSelectedCategoryId()
     {
         final RadioGroup rg = (RadioGroup) findViewById(R.id.rb_categories);
         int categoryId = 0;
@@ -210,5 +226,16 @@ public class EditActivity extends AppCompatActivity {
 
     public void cancelEdition(View view){
         finish();
+    }
+
+    private void populateSpinner() {
+        WatchedWhereDaoDb watchedWhereDao = new WatchedWhereDaoDb(this);
+        this.watchedWhereList = watchedWhereDao.listAll();
+
+        ArrayAdapter<WatchedWhere> adapter = new ArrayAdapter<WatchedWhere>(this, android.R.layout.simple_list_item_1, watchedWhereList);
+
+        this.spinnerWatchedWhere = (Spinner) findViewById(R.id.spinnerWatchedWhere);
+        this.spinnerWatchedWhere.setAdapter(adapter);
+        //this.spinnerWatchedWhere.setSelection( this.movie.getWatchedWhere().getId()  );
     }
 }

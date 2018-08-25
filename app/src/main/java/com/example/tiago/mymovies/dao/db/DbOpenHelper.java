@@ -72,6 +72,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('Drama')");
         db.execSQL("INSERT INTO "+ DbOpenHelper.CATEGORY_TABLE+" ('name') VALUES ('Seriado')");
 
+        db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year', 'watched_where_id') VALUES ('The Man Who Knew Too Little', 'O Homem que Sabia de Menos', 2,'...', '1997', 3)");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year', 'watched_where_id') VALUES ('Lethal Weapon 1', 'Máquina Mortifera 1', 6,'...', '1987', 5)");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year', 'watched_where_id') VALUES ('Die Hard 1', 'Duro de Matar 1', 5,'...', '1988', 4)");
         db.execSQL("INSERT INTO "+ DbOpenHelper.MOVIE_TABLE+" ('title_en', 'title_pt_br', 'category_id','comment', 'release_year', 'watched_where_id') VALUES ('The Blair Witch Project', 'A Bruxa de Blair', 4,'...', '1999', 3)");
@@ -90,7 +91,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO "+ DbOpenHelper.WATCHED_WHERE_TABLE +" ('name') VALUES('Cinema')" );
         db.execSQL("INSERT INTO "+ DbOpenHelper.WATCHED_WHERE_TABLE +" ('name') VALUES('Netflix')" );
         db.execSQL("INSERT INTO "+ DbOpenHelper.WATCHED_WHERE_TABLE +" ('name') VALUES('Alugou DVD')" );
-        db.execSQL("INSERT INTO "+ DbOpenHelper.WATCHED_WHERE_TABLE +" ('name') VALUES('Download')" );
+        db.execSQL("INSERT INTO "+ DbOpenHelper.WATCHED_WHERE_TABLE +" ('name') VALUES('Download, PC, Celular ...')" );
     }
 
     @Override
