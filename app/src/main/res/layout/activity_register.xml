@@ -193,7 +193,7 @@
 
         <EditText
             android:id="@+id/edtReleaseYear"
-            android:layout_width="51dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:maxLength="4"
