@@ -27,7 +27,7 @@ public class RegisterValidation extends FormValidation {
     @Override
     public void validateTitleEn(EditText edtTitleEn) {
         if( edtTitleEn.getText().toString().trim().isEmpty() ){
-            this.errorValidationMessage = "O campo TITLE está em branco";
+            this.errorValidationMessage = "O campo TITLE está em branco.";
         }
 
         if( edtTitleEn.getText().length() > 50){
@@ -42,7 +42,7 @@ public class RegisterValidation extends FormValidation {
         if( edtReleaseYear.getText().toString().trim().isEmpty() ){
             this.errorValidationMessage = "O campo ANO DE LANÇAMENTO está em branco.";
         }else if( Integer.parseInt( edtReleaseYear.getText().toString() ) > currentYear ){
-            this.errorValidationMessage = "O campo ANO DE LANÇAMENTO deve ser menor ou igual ao ano atual("+currentYear+").";
+            this.errorValidationMessage = "O campo ANO DE LANÇAMENTO deve ser menor ou igual ao ano atual ("+currentYear+").";
         }
     }
 
