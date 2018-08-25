@@ -49,35 +49,35 @@ public class RegisterValidation extends FormValidation {
     @Override
     public void validateActorScore(RatingBar rbActorScore) {
         if(  rbActorScore.getRating() == 0 ){
-            this.errorValidationMessage = "O campo ATUAÇÃO DOS ATORES não está preenchido.";
+            this.errorValidationMessage = "O ANO DE LANÇAMENTO deve ser avaliado!";
         }
     }
 
     @Override
     public void validateMusicScore(RatingBar rbMusicScore) {
         if(  rbMusicScore.getRating() == 0 ){
-            this.errorValidationMessage = "O campo MÚSICA / TRILHA SONORA não está preenchido.";
+            this.errorValidationMessage = "A MÚSICA / TRILHA SONORA deve ser avaliada!";
         }
     }
 
     @Override
     public void validateStoryScore(RatingBar rbStoryScore) {
         if(  rbStoryScore.getRating() == 0 ){
-            this.errorValidationMessage = "O campo ESTÓRIA / TEMA não está preenchido.";
+            this.errorValidationMessage = "A ESTÓRIA / TEMA deve ser avaliada!";
         }
     }
 
     @Override
     public void validateFinalStoryScore(RatingBar rbFinalStoryScore) {
         if(  rbFinalStoryScore.getRating() == 0 ){
-            this.errorValidationMessage = "O campo ESTÓRIA FINAL/ ENCERRAMENTO não está preenchido.";
+            this.errorValidationMessage = "A ESTÓRIA FINAL/ ENCERRAMENTO deve ser avaliada!";
         }
     }
 
     @Override
     public void validateDurationScore(RatingBar rbDurationScore) {
         if(  rbDurationScore.getRating() == 0 ){
-            this.errorValidationMessage = "O campo DURAÇÃO / TEMPO DO FILME não está preenchido.";
+            this.errorValidationMessage = "A DURAÇÃO / TEMPO DO FILME deve ser avaliada!";
         }
     }
 
