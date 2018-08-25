@@ -15,13 +15,13 @@ import static org.junit.Assert.assertEquals;
 
 
 @RunWith(AndroidJUnit4.class)
-public class MovieScoreTest {
+public class FieldsMovieScoreTest {
 
     Context appContext;
     FormValidation formValidation;
     RatingBar rbActorScore, rbMusicScore, rbStoryScore, rbFinalStoryScore, rbDurationScore;
 
-    public MovieScoreTest() {
+    public FieldsMovieScoreTest() {
         this.appContext = InstrumentationRegistry.getTargetContext();
     }
 
