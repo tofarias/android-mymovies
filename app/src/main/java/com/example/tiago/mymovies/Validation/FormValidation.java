@@ -15,6 +15,10 @@ public abstract class FormValidation implements IFormValidation {
         this.errorValidationMessage = "";
     }
 
+    public String getErrorValidationMessage() {
+        return errorValidationMessage;
+    }
+
     @Override
     public boolean isValid() {
 
