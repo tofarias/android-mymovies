@@ -31,6 +31,7 @@ public class MovieDaoDb implements MovieDao {
         values.put("category_id",movie.getCategory().getId());
         values.put("comment",movie.getComment());
         values.put("release_year",movie.getReleaseYear());
+        values.put("watched_where_id",1); // REMOVER
 
         long id = db.insert("movie",null,values);
         db.close();
