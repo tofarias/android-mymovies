@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.example.tiago.mymovies.Validation.EditValidation;
 import com.example.tiago.mymovies.dao.MovieDao;
 import com.example.tiago.mymovies.dao.db.CategoryDaoDb;
 import com.example.tiago.mymovies.dao.db.MovieDaoDb;
@@ -156,27 +157,39 @@ public class EditActivity extends AppCompatActivity {
         Float finalStoryScore = this.rbFinalStoryScore.getRating();
         Float storyScore = this.rbStoryScore.getRating();
 
-        MovieScoreDaoDb movieScoreDaoDb = new MovieScoreDaoDb(this);
+        EditValidation formValidation = new EditValidation(this);
+        formValidation.validateTitlePtBr( edtTitlePtBr );
+        formValidation.validateTitleEn( edtTitleEn );
+        formValidation.validateReleaseYear( edtReleaseYear );
+        formValidation.validateActorScore( rbActorScore );
+        formValidation.validateMusicScore( rbMusicScore );
+        formValidation.validateDurationScore( rbDurationScore );
+        formValidation.validateFinalStoryScore( rbFinalStoryScore );
+        formValidation.validateStoryScore( rbStoryScore );
 
-        MovieScore movieScore = new MovieScore(movie,
-                                                actorScore,
-                                                musicScore,
-                                                durationScore,
-                                                finalStoryScore,
-                                                storyScore
-                                                );
+        if( formValidation.isValid() ) {
 
-        try{
-            movieDaoDb.update(movie);
-            movieScoreDaoDb.update(movieScore);
+            MovieScoreDaoDb movieScoreDaoDb = new MovieScoreDaoDb(this);
 
-            Toast.makeText(this,"Atualização realizada com sucesso!",Toast.LENGTH_SHORT).show();
-        }catch (Exception e) {
-            Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
-            toast.show();
+            MovieScore movieScore = new MovieScore(movie,
+                    actorScore,
+                    musicScore,
+                    durationScore,
+                    finalStoryScore,
+                    storyScore
+            );
+
+            try {
+                movieDaoDb.update(movie);
+                movieScoreDaoDb.update(movieScore);
+
+                Toast.makeText(this, "Atualização realizada com sucesso!", Toast.LENGTH_SHORT).show();
+                finish();
+            } catch (Exception e) {
+                Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
-
-        finish();
     }
 
     public int getSelectedCategoryId()
