@@ -1,6 +1,7 @@
 package com.example.tiago.mymovies.Validation;
 
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 
 public interface IFormValidation {
@@ -12,5 +13,6 @@ public interface IFormValidation {
     public void validateStoryScore(RatingBar rbStoryScore);
     public void validateFinalStoryScore(RatingBar rbFinalStoryScore);
     public void validateDurationScore(RatingBar rbDurationScore);
+    public void validateCategory( RadioGroup radioGroupCategories );
     public boolean isValid();
 }

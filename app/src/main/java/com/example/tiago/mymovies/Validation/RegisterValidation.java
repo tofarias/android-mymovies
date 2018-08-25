@@ -2,6 +2,7 @@ package com.example.tiago.mymovies.Validation;
 
 import android.content.Context;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 
 import java.util.Calendar;
@@ -77,6 +78,13 @@ public class RegisterValidation extends FormValidation {
     public void validateDurationScore(RatingBar rbDurationScore) {
         if(  rbDurationScore.getRating() == 0 ){
             this.errorValidationMessage = "O campo DURAÇÃO / TEMPO DO FILME não está preenchido.";
+        }
+    }
+
+    @Override
+    public void validateCategory(RadioGroup radioGroupCategories) {
+        if (radioGroupCategories.getCheckedRadioButtonId() == -1) {
+            this.errorValidationMessage = "O campo Gênero não está preenchido.";
         }
     }
 }
