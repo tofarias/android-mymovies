@@ -84,7 +84,7 @@ public class RegisterValidation extends FormValidation {
     @Override
     public void validateCategory(RadioGroup radioGroupCategories) {
         if (radioGroupCategories.getCheckedRadioButtonId() == -1) {
-            this.errorValidationMessage = "O campo Gênero não está preenchido.";
+            this.errorValidationMessage = "O Gênero deve ser informado!";
         }
     }
 }
