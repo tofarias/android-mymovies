@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         this.recyclerView.setAdapter(movieAdapter);
         this.recyclerView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
     }
 
     public void openForm(View v){
