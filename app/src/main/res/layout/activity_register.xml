@@ -55,12 +55,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="40dp"
             android:text="Ano Lançamento:"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtTitleEn" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_content" />
 
         <TextView
             android:id="@+id/textTitleEn2"
@@ -301,7 +301,7 @@
             android:layout_marginTop="8dp"
             android:text="Aonde Assistiu?"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toTopOf="@+id/textTitleEn" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -315,6 +315,17 @@
             app:layout_constraintStart_toEndOf="@+id/edtTitlePtBr"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/fragment_content"
+            android:layout_width="369dp"
+            android:layout_height="107dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTitleEn" />
+
 
     </android.support.constraint.ConstraintLayout>
 

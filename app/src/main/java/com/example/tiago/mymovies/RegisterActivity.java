@@ -4,6 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.util.Log;
@@ -64,6 +67,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean hasFocus) {
                 if (!hasFocus) {
                     requestOMDBApi();
+
+                    //showMovieDetails();
                 }
             }
         });
@@ -175,6 +180,24 @@ public class RegisterActivity extends AppCompatActivity {
                         edtReleaseYear.setText( movie.Year.toString() );
 
                         new DownloadImageFromUrl((ImageView) findViewById(R.id.imageView)).execute(movie.Poster);
+
+                        //
+
+                        OMDBFragment omdbFragment = new OMDBFragment();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("link", "TIAGO");
+                        bundle.putSerializable("movie", movie);
+                        omdbFragment.setArguments(bundle);
+
+                        FragmentManager fm = getSupportFragmentManager();
+
+                        Fragment fragment = fm.findFragmentById(R.id.fragment_content);
+
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.add(R.id.fragment_content, omdbFragment);
+
+                        ft.commit();
                     }
                 }
             }
@@ -187,6 +210,17 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.d("onFailure",t.getMessage());
             }
         });
+    }
+
+    public void showMovieDetails()
+    {
+        Toast.makeText(this,"OK!",Toast.LENGTH_SHORT).show();
+
+        FragmentManager fm = getSupportFragmentManager();
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.fragment_content, new OMDBFragment());
+        ft.commit();
     }
 
     public void addMovie(View view)
