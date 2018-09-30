@@ -9,8 +9,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:cardCornerRadius="3dp"
-        app:contentPaddingBottom="20dp">
+        android:layout_margin="5dp"
+        android:elevation="50dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:contentPadding="10dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,14 +33,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
-                android:id="@+id/movieId"
+                android:id="@+id/movieImdbId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/movieNamePtBr"
                 android:layout_alignParentStart="true"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:text="movieId"
+                android:text="movieImdbId"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -118,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Ano Lançamento:"
+                android:text="Ano:"
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/movieCategory" />
@@ -132,7 +135,7 @@
                 android:text="Gênero:"
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movieId" />
+                app:layout_constraintTop_toBottomOf="@+id/movieImdbId" />
 
             <TextView
                 android:id="@+id/movieReleaseYear"
