@@ -34,8 +34,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                                                 "title_pt_br VARCHAR(50) UNIQUE," +
                                                 "comment VARCHAR(100)," +
                                                 "release_year CHAR(4) NOT NULL,"  +
-                                                "imdb_id VARCHAR(50) NOT NULL,"+
-                                                "imdb_poster VARCHAR(50) NOT NULL,"+
+                                                "imdb_id VARCHAR(50) NOT NULL UNIQUE,"+
+                                                "imdb_poster VARCHAR(50) NOT NULL UNIQUE,"+
                                                 "FOREIGN KEY(category_id) REFERENCES category(id),"+
                                                 "FOREIGN KEY(watched_where_id) REFERENCES watched_where(id)"+
                                                 ")";
