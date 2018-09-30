@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.example.tiago.mymovies.ImageView.ImageFromUrl;
 import com.example.tiago.mymovies.R;
 import com.example.tiago.mymovies.holder.MovieHolder;
 import com.example.tiago.mymovies.model.Movie;
@@ -39,6 +41,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
         String movieCategory = this.movieList.get(position).getCategory().getName();
         String movieComment = this.movieList.get(position).getComment();
         String movieReleaseYear = this.movieList.get(position).getReleaseYear();
+        String movieImdbId = this.movieList.get(position).getImdbId();
+        String movieImdbPoster = this.movieList.get(position).getImdbPoster();
 
         holder.movieNameEn.setText(movieNameEn);
         holder.movieNamePtBr.setText(movieNamePtBr);
@@ -46,6 +50,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
         holder.movieCategory.setText(movieCategory);
         holder.movieComment.setText(movieComment);
         holder.movieReleaseYear.setText(movieReleaseYear);
+        holder.movieImdbId.setText(movieImdbId);
+        new ImageFromUrl((ImageView) holder.movieImdbPoster).execute(movieImdbPoster);
     }
 
     @Override

@@ -176,7 +176,9 @@ public class EditActivity extends AppCompatActivity {
                                             comment,
                                             new Category( this.getRadioButtonSelectedCategoryId() ),
                                             releaseYear,
-                                            new WatchedWhere( this.getSpinnerWatchedWhereSelectedId() )
+                                            new WatchedWhere( this.getSpinnerWatchedWhereSelectedId() ),
+                                            "",
+                                            ""
                                     );
 
             MovieDao movieDaoDb = new MovieDaoDb(this);

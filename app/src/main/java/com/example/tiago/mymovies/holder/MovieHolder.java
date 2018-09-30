@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tiago.mymovies.EditActivity;
@@ -18,16 +19,20 @@ public class MovieHolder extends RecyclerView.ViewHolder{
     public TextView movieCategory;
     public TextView movieComment;
     public TextView movieReleaseYear;
+    public TextView movieImdbId;
+    public ImageView movieImdbPoster;
 
     public MovieHolder(@NonNull final View itemView) {
         super(itemView);
 
-        this.movieNameEn   = itemView.findViewById(R.id.movieNameEn);
-        this.movieNamePtBr = itemView.findViewById(R.id.movieNamePtBr);
-        this.movieId       = itemView.findViewById(R.id.movieId);
-        this.movieCategory = itemView.findViewById(R.id.movieCategory);
-        this.movieComment  = itemView.findViewById(R.id.movieComment);
+        this.movieNameEn      = itemView.findViewById(R.id.movieNameEn);
+        this.movieNamePtBr    = itemView.findViewById(R.id.movieNamePtBr);
+        this.movieId          = itemView.findViewById(R.id.movieImdbId);
+        this.movieCategory    = itemView.findViewById(R.id.movieCategory);
+        this.movieComment     = itemView.findViewById(R.id.movieComment);
         this.movieReleaseYear = itemView.findViewById(R.id.movieReleaseYear);
+        this.movieImdbId      = itemView.findViewById(R.id.movieImdbId);
+        this.movieImdbPoster  = itemView.findViewById(R.id.movieImdbPoster);
 
         itemView.setOnClickListener(new View.OnClickListener(){
 

@@ -50,7 +50,7 @@ public class MovieScoreDaoDb implements MovieScoreDao {
 
         MovieScore movieScore = new MovieScore(
                 cursor.getInt(cursor.getColumnIndex("id")),
-                new Movie(cursor.getInt(cursor.getColumnIndex("movie_id")), null,null,null,null, null,null),
+                new Movie(cursor.getInt(cursor.getColumnIndex("movie_id"))),
                 cursor.getFloat(cursor.getColumnIndex("actors_score")),
                 cursor.getFloat(cursor.getColumnIndex("music_score")),
                 cursor.getFloat(cursor.getColumnIndex("duration_score")),
