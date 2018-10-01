@@ -27,7 +27,7 @@ public class MovieHolder extends RecyclerView.ViewHolder{
 
         this.movieNameEn      = itemView.findViewById(R.id.movieNameEn);
         this.movieNamePtBr    = itemView.findViewById(R.id.movieNamePtBr);
-        this.movieId          = itemView.findViewById(R.id.movieImdbId);
+        this.movieId          = itemView.findViewById(R.id.movieId);
         this.movieCategory    = itemView.findViewById(R.id.movieCategory);
         this.movieComment     = itemView.findViewById(R.id.movieComment);
         this.movieReleaseYear = itemView.findViewById(R.id.movieReleaseYear);
