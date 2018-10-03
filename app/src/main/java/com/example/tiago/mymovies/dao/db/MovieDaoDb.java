@@ -33,8 +33,8 @@ public class MovieDaoDb implements MovieDao {
         values.put("comment",movie.getComment());
         values.put("release_year",movie.getReleaseYear());
         values.put("watched_where_id",movie.getWatchedWhere().getId());
-        values.put("imdb_id",movie.getWatchedWhere().getId());
-        values.put("imdb_poster",movie.getWatchedWhere().getId());
+        values.put("imdb_id",movie.getImdbId());
+        values.put("imdb_poster",movie.getImdbPoster());
 
         long id = db.insert("movie",null,values);
         db.close();

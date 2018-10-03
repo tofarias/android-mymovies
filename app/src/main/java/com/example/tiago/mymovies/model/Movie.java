@@ -34,7 +34,7 @@ public class Movie {
         this.titlePtBr = titlePtBr;
     }
 
-    public Movie(String titleEn, String titlePtBr, Category category, String comment, String releaseYear, WatchedWhere watchedWhere) {
+    public Movie(String titleEn, String titlePtBr, Category category, String comment, String releaseYear, WatchedWhere watchedWhere, String imdbId, String imdbPoster) {
         this.titleEn = titleEn;
         this.titlePtBr = titlePtBr;
         this.comment = comment;
@@ -42,6 +42,8 @@ public class Movie {
         this.category = category;
         this.releaseYear = releaseYear;
         this.watchedWhere = watchedWhere;
+        this.imdbId = imdbId;
+        this.imdbPoster = imdbPoster;
     }
 
     public String getImdbId() {

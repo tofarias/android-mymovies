@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -47,14 +46,16 @@ public class RegisterActivity extends AppCompatActivity {
     Spinner spinnerWatchedWhere;
     List<WatchedWhere> watchedWhereList;
     RadioGroup radioGroupCategories;
+    ImageView imageViewMoviePoster;
+    private static com.example.tiago.mymovies.OMDBApi.Movie omdbMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        EditText edtTitlePtBr = findViewById(R.id.edtTitlePtBr);
-        edtTitlePtBr.requestFocus();
+        EditText edtTitleEn = findViewById(R.id.edtTitleEn);
+        edtTitleEn.requestFocus();
 
         this.createCategoryRadioButtons();
         this.populateSpinner();
@@ -169,21 +170,22 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
 
-                    com.example.tiago.mymovies.OMDBApi.Movie movie = response.body();
+                    omdbMovie = response.body();
+                    //com.example.tiago.mymovies.OMDBApi.Movie movie = response.body();
 
-                    if( movie.imdbID == null ){
+                    if( omdbMovie.imdbID == null ){
 
                         Toast.makeText(RegisterActivity.this,"Filme não encontrado",Toast.LENGTH_SHORT).show();
 
                     }else{
                         edtReleaseYear = (EditText) findViewById(R.id.edtReleaseYear);
-                        edtReleaseYear.setText( movie.Year.toString() );
+                        edtReleaseYear.setText( omdbMovie.Year.toString() );
 
-                        new DownloadImageFromUrl((ImageView) findViewById(R.id.imageView)).execute(movie.Poster);
+                        new DownloadImageFromUrl((ImageView) findViewById(R.id.imageViewMoviePoster)).execute(omdbMovie.Poster);
 
                         //
 
-                        OMDBFragment omdbFragment = new OMDBFragment();
+                        /*OMDBFragment omdbFragment = new OMDBFragment();
 
                         Bundle bundle = new Bundle();
                         bundle.putString("link", "TIAGO");
@@ -197,7 +199,7 @@ public class RegisterActivity extends AppCompatActivity {
                         FragmentTransaction ft = fm.beginTransaction();
                         ft.add(R.id.fragment_content, omdbFragment);
 
-                        ft.commit();
+                        ft.commit();*/
                     }
                 }
             }
@@ -241,6 +243,8 @@ public class RegisterActivity extends AppCompatActivity {
         this.rbFinalStoryScore  = (RatingBar) findViewById(R.id.rbFinalStoryScore);
         this.rbStoryScore       = (RatingBar) findViewById(R.id.rbStoryScore);
 
+        this.imageViewMoviePoster = (ImageView) findViewById(R.id.imageViewMoviePoster);
+
         //
 
         RegisterValidation formValidation = new RegisterValidation(this);
@@ -259,7 +263,7 @@ public class RegisterActivity extends AppCompatActivity {
             Category category = new Category(this.getRadioButtonSelectedCategoryId());
             WatchedWhere watchedWhere = new WatchedWhere( this.getSpinnerWatchedWhereSelectedId() );
 
-            Movie movie = new Movie(titleEn, titlePtBr, category, comment, releaseYear, watchedWhere);
+            Movie movie = new Movie(titleEn, titlePtBr, category, comment, releaseYear, watchedWhere, omdbMovie.imdbID, omdbMovie.Poster);
 
             MovieDao movieDao = new MovieDaoDb(this);
 
