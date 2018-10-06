@@ -9,8 +9,15 @@ public class Movie {
     private Category category;
     private String releaseYear;
     private WatchedWhere watchedWhere;
+    private String imdbId;
+    private String imdbPoster;
 
-    public Movie(int id, String titleEn, String titlePtBr, String comment, Category category, String releaseYear, WatchedWhere watchedWhere) {
+    public Movie(int id)
+    {
+        this.id = id;
+    }
+
+    public Movie(int id, String titleEn, String titlePtBr, String comment, Category category, String releaseYear, WatchedWhere watchedWhere, String imdbId, String imdbPoster) {
         this.titleEn = titleEn;
         this.titlePtBr = titlePtBr;
         this.comment = comment;
@@ -18,6 +25,8 @@ public class Movie {
         this.category = category;
         this.releaseYear = releaseYear;
         this.watchedWhere = watchedWhere;
+        this.imdbId = imdbId;
+        this.imdbPoster = imdbPoster;
     }
 
     public Movie(String titleEn, String titlePtBr) {
@@ -25,7 +34,7 @@ public class Movie {
         this.titlePtBr = titlePtBr;
     }
 
-    public Movie(String titleEn, String titlePtBr, Category category, String comment, String releaseYear, WatchedWhere watchedWhere) {
+    public Movie(String titleEn, String titlePtBr, Category category, String comment, String releaseYear, WatchedWhere watchedWhere, String imdbId, String imdbPoster) {
         this.titleEn = titleEn;
         this.titlePtBr = titlePtBr;
         this.comment = comment;
@@ -33,6 +42,24 @@ public class Movie {
         this.category = category;
         this.releaseYear = releaseYear;
         this.watchedWhere = watchedWhere;
+        this.imdbId = imdbId;
+        this.imdbPoster = imdbPoster;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
+    public String getImdbPoster() {
+        return imdbPoster;
+    }
+
+    public void setImdbPoster(String imdbPoster) {
+        this.imdbPoster = imdbPoster;
     }
 
     public String getReleaseYear() {

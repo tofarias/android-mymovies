@@ -33,6 +33,8 @@ public class MovieDaoDb implements MovieDao {
         values.put("comment",movie.getComment());
         values.put("release_year",movie.getReleaseYear());
         values.put("watched_where_id",movie.getWatchedWhere().getId());
+        values.put("imdb_id",movie.getImdbId());
+        values.put("imdb_poster",movie.getImdbPoster());
 
         long id = db.insert("movie",null,values);
         db.close();
@@ -52,6 +54,8 @@ public class MovieDaoDb implements MovieDao {
         values.put("comment",movie.getComment());
         values.put("release_year",movie.getReleaseYear());
         values.put("watched_where_id",movie.getWatchedWhere().getId());
+        values.put("imdb_id",movie.getWatchedWhere().getId());
+        values.put("imdb_poster",movie.getWatchedWhere().getId());
 
         db.update("movie",values,"id = ?",new String[]{ Integer.toString(movie.getId()) });
         db.close();
@@ -71,7 +75,7 @@ public class MovieDaoDb implements MovieDao {
         SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
 
         Cursor cursor = db.query("movie",
-                new String[]{"id","title_pt_br", "title_en", "comment", "category_id", "release_year", "watched_where_id"},
+                new String[]{"id","title_pt_br", "title_en", "comment", "category_id", "release_year", "watched_where_id", "imdb_id", "imdb_poster"},
                 "id = ?",new String[]{ id },null,null,null);
 
         if( cursor != null ){
@@ -85,7 +89,9 @@ public class MovieDaoDb implements MovieDao {
                 cursor.getString(cursor.getColumnIndex("comment")),
                 new Category(cursor.getInt(cursor.getColumnIndex("category_id"))),
                 cursor.getString(cursor.getColumnIndex("release_year")),
-                new WatchedWhere(cursor.getInt(cursor.getColumnIndex("watched_where_id")))
+                new WatchedWhere(cursor.getInt(cursor.getColumnIndex("watched_where_id"))),
+                cursor.getString(cursor.getColumnIndex("imdb_id")),
+                cursor.getString(cursor.getColumnIndex("imdb_poster"))
             );
 
             return movie;
@@ -96,7 +102,17 @@ public class MovieDaoDb implements MovieDao {
 
             SQLiteDatabase db =  this.dbSqlite.getReadableDatabase();
 
-            String rawQuery = "SELECT movie.id, title_en, title_pt_br, category.name as category_category, category.id category_id, comment, release_year, watched_where_id, watched_where.name watched_where_name " +
+            String rawQuery = "SELECT movie.id," +
+                              "title_en," +
+                              "title_pt_br," +
+                              "category.name as category_category," +
+                              "category.id category_id," +
+                              "comment," +
+                              "release_year," +
+                              "watched_where_id," +
+                              "watched_where.name watched_where_name, " +
+                              "imdb_id, "+
+                              "imdb_poster "+
                               "FROM movie " +
                                             "INNER JOIN category ON (category.id = movie.category_id)" +
                                             "INNER JOIN watched_where ON (watched_where.id = movie.watched_where_id)" +
@@ -116,11 +132,13 @@ public class MovieDaoDb implements MovieDao {
                 String releaseYear   = cursor.getString(cursor.getColumnIndex("release_year"));
                 int watchedWhereId   = cursor.getInt(cursor.getColumnIndex("watched_where_id"));
                 String watchedWhereName   = cursor.getString(cursor.getColumnIndex("watched_where_name"));
+                String imdbId   = cursor.getString(cursor.getColumnIndex("imdb_id"));
+                String imdbIdPoster   = cursor.getString(cursor.getColumnIndex("imdb_poster"));
 
                 Category categoryModel = new Category(categoryId, categoryName);
                 WatchedWhere watchedWhereModel = new WatchedWhere( watchedWhereId, watchedWhereName );
 
-                Movie movie = new Movie(id, titleEn, titlePtBr, comment, new Category(categoryId, categoryName), releaseYear, watchedWhereModel);
+                Movie movie = new Movie(id, titleEn, titlePtBr, comment, new Category(categoryId, categoryName), releaseYear, watchedWhereModel, imdbId, imdbIdPoster);
                 moviesList.add(movie);
             }
             return moviesList;
