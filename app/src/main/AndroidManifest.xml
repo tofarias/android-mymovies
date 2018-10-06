@@ -28,12 +28,12 @@
         <service
             android:name=".Service.AudioBackgroundService"
             android:enabled="true" />
-        <receiver android:name=".Service.WifiReceiver" android:exported="false" >
+        <receiver android:name=".Service.WifiReceiver" android:exported="true" android:enabled="true" >
             *   <intent-filter>
             *     <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             *   </intent-filter>
             * </receiver>
-        <service android:name=".Service.WifiActiveService" android:exported="false" />
+        <service android:name=".Service.WifiActiveService" android:exported="true" android:enabled="true"/>
     </application>
 
 </manifest>

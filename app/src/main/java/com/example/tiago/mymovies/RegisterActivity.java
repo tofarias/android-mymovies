@@ -23,6 +23,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.tiago.mymovies.ImageView.ImageFromUrl;
 import com.example.tiago.mymovies.OMDBApi.ControlLifeCycle;
 import com.example.tiago.mymovies.Validation.RegisterValidation;
 import com.example.tiago.mymovies.dao.MovieDao;
@@ -183,7 +184,7 @@ public class RegisterActivity extends AppCompatActivity {
                         edtReleaseYear = (EditText) findViewById(R.id.edtReleaseYear);
                         edtReleaseYear.setText( omdbMovie.Year.toString() );
 
-                        new DownloadImageFromUrl((ImageView) findViewById(R.id.imageViewMoviePoster)).execute(omdbMovie.Poster);
+                        new ImageFromUrl((ImageView) findViewById(R.id.imageViewMoviePoster)).execute(omdbMovie.Poster);
 
                         //
 
