@@ -1,9 +1,12 @@
 package com.example.tiago.mymovies;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -67,9 +70,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (!hasFocus) {
-                    requestOMDBApi();
 
-                    //showMovieDetails();
+                    requestOMDBApi();
+                    showMovieDetails();
                 }
             }
         });
@@ -171,7 +174,6 @@ public class RegisterActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     omdbMovie = response.body();
-                    //com.example.tiago.mymovies.OMDBApi.Movie movie = response.body();
 
                     if( omdbMovie.imdbID == null ){
 
@@ -185,11 +187,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                         //
 
-                        /*OMDBFragment omdbFragment = new OMDBFragment();
+                        OMDBFragment omdbFragment = new OMDBFragment();
 
                         Bundle bundle = new Bundle();
                         bundle.putString("link", "TIAGO");
-                        bundle.putSerializable("movie", movie);
+                        bundle.putSerializable("movie", omdbMovie);
                         omdbFragment.setArguments(bundle);
 
                         FragmentManager fm = getSupportFragmentManager();
@@ -199,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
                         FragmentTransaction ft = fm.beginTransaction();
                         ft.add(R.id.fragment_content, omdbFragment);
 
-                        ft.commit();*/
+                        ft.commit();
                     }
                 }
             }
@@ -216,13 +218,20 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void showMovieDetails()
     {
-        Toast.makeText(this,"OK!",Toast.LENGTH_SHORT).show();
-
         FragmentManager fm = getSupportFragmentManager();
 
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.fragment_content, new OMDBFragment());
         ft.commit();
+    }
+
+    public void showIMDBMovieDetailInBrowser(View view)
+    {
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.imdb.com/title/"+omdbMovie.imdbID));
+        // Verifica se existem aplicativos que atendem essa Intent no Android
+        if (i.resolveActivity(getPackageManager()) != null) {
+            startActivity(i);
+        }
     }
 
     public void addMovie(View view)
