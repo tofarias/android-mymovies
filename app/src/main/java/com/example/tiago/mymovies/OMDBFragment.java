@@ -25,9 +25,6 @@ public class OMDBFragment extends Fragment{
         Bundle bundle = getArguments();
         if (bundle != null) {
             Serializable movie = bundle.getSerializable("movie");
-
-            //TextView txtReleased = (TextView) findViewById(R.id.txtReleased);
-
         }
     }
 

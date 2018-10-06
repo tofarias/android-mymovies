@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(it);
     }
 
-    public  void playBackgroundAudio(){
+    public void playBackgroundAudio(){
 
         Intent intent = new Intent(MainActivity.this , AudioBackgroundService.class);
         PendingIntent pendingIntent = PendingIntent.getService(MainActivity.this , 0 , intent , PendingIntent.FLAG_UPDATE_CURRENT);
