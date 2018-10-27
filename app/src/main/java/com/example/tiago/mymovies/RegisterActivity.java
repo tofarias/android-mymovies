@@ -200,7 +200,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Fragment fragment = fm.findFragmentById(R.id.fragment_content);
 
                         FragmentTransaction ft = fm.beginTransaction();
-                        ft.add(R.id.fragment_content, omdbFragment);
+                        ft.replace(R.id.fragment_content, omdbFragment);
 
                         ft.commit();
                     }

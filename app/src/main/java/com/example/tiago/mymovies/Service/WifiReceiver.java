@@ -16,7 +16,7 @@ public class WifiReceiver extends BroadcastReceiver {
         if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(intent.getAction())
                 && WifiManager.WIFI_STATE_ENABLED == wifiState) {
             if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                Log.v(TAG, "Wifi is now enabled");
+                Log.v(TAG, "Wifi habilitado");
             }
             context.startService(new Intent(context, WifiActiveService.class));
         }
